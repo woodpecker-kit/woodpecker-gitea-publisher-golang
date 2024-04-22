@@ -163,7 +163,7 @@ func GlobalBeforeAction(c *cli.Context) error {
 	if isDebug {
 		// print global debug info
 		allEnvPrintStr := env_kit.FindAllEnv4PrintAsSortJust(36)
-		wd_log.Verbosef("==> plugin start with all env:\n%s", allEnvPrintStr)
+		wd_log.Verbosef("==> gitea_publish_golang start with all env:\n%s", allEnvPrintStr)
 		currentUser, err := user.Current()
 		if err == nil {
 			wd_log.Verbosef("==> current Username : %s\n", currentUser.Username)

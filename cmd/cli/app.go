@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/urfave/cli/v2"
 	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/constant"
+	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/gitea_publish_golang"
 	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/internal/pkg_kit"
-	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/plugin"
 	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/zymosis"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_urfave_cli_v2"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_urfave_cli_v2/cli_exit_urfave"
@@ -57,8 +57,8 @@ func NewCliApp() *cli.App {
 		wd_urfave_cli_v2.WoodpeckerUrfaveCliFlags(),
 		constant.CommonFlag(),
 		constant.HideCommonGlobalFlag(),
-		plugin.GlobalFlag(),
-		plugin.HideGlobalFlag(),
+		gitea_publish_golang.GlobalFlag(),
+		gitea_publish_golang.HideGlobalFlag(),
 	)
 
 	app.Flags = flags

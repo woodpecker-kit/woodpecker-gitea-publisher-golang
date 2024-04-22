@@ -1,4 +1,4 @@
-package plugin
+package gitea_publish_golang
 
 import (
 	"fmt"

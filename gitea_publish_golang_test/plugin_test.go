@@ -1,7 +1,7 @@
-package plugin_test
+package gitea_publish_golang_test
 
 import (
-	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/plugin"
+	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/gitea_publish_golang"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_mock"
@@ -36,7 +36,7 @@ func TestCheckArgsPlugin(t *testing.T) {
 	tests := []struct {
 		name           string
 		woodpeckerInfo wd_info.WoodpeckerInfo
-		settings       plugin.Settings
+		settings       gitea_publish_golang.Settings
 		workRoot       string
 
 		isDryRun          bool
@@ -126,7 +126,7 @@ func TestPlugin(t *testing.T) {
 	tests := []struct {
 		name           string
 		woodpeckerInfo wd_info.WoodpeckerInfo
-		settings       plugin.Settings
+		settings       gitea_publish_golang.Settings
 		workRoot       string
 
 		ossTransferKey  string

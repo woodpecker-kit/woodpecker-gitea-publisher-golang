@@ -1,4 +1,4 @@
-package plugin
+package gitea_publish_golang
 
 import "github.com/woodpecker-kit/woodpecker-tools/wd_info"
 
@@ -13,7 +13,7 @@ const (
 )
 
 type (
-	// Settings plugin private config
+	// Settings gitea_publish_golang private config
 	Settings struct {
 		Debug             bool
 		TimeoutSecond     uint

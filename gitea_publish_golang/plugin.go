@@ -1,4 +1,4 @@
-package plugin
+package gitea_publish_golang
 
 import (
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
@@ -6,7 +6,7 @@ import (
 )
 
 type (
-	// Plugin plugin all config
+	// Plugin gitea_publish_golang all config
 	Plugin struct {
 		Name           string
 		Version        string

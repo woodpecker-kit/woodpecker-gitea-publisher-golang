@@ -1,6 +1,6 @@
 ---
 name: woodpecker-gitea-publisher-golang
-description: woodpecker plugin template
+description: woodpecker gitea_publish_golang template
 author: woodpecker-kit
 tags: [ environment, woodpecker-gitea-publisher-golang ]
 containerImage: woodpecker-kit/woodpecker-gitea-publisher-golang

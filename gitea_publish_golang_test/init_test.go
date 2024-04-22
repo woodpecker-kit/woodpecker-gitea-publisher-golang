@@ -1,10 +1,10 @@
-package plugin_test
+package gitea_publish_golang_test
 
 import (
 	"fmt"
 	"github.com/sinlov-go/unittest-kit/env_kit"
 	"github.com/sinlov-go/unittest-kit/unittest_file_kit"
-	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/plugin"
+	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/gitea_publish_golang"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_flag"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
@@ -34,12 +34,12 @@ var (
 	// mustSetInCiEnvList
 	//  for check set in CI env not empty
 	mustSetInCiEnvList = []string{
-		plugin.EnvGiteaPublishGolangApiKey,
+		gitea_publish_golang.EnvGiteaPublishGolangApiKey,
 	}
 
 	// mustSetArgsAsEnvList
 	mustSetArgsAsEnvList = []string{
-		plugin.EnvGiteaPublishGolangApiKey,
+		gitea_publish_golang.EnvGiteaPublishGolangApiKey,
 	}
 
 	valEnvTimeoutSecond             uint
@@ -66,12 +66,12 @@ func init() {
 	valEnvTimeoutSecond = uint(env_kit.FetchOsEnvInt(wd_flag.EnvKeyPluginTimeoutSecond, 10))
 	valEnvPluginDebug = env_kit.FetchOsEnvBool(wd_flag.EnvKeyPluginDebug, false)
 
-	valEnvGiteaPublishGolangApiKey = env_kit.FetchOsEnvStr(plugin.EnvGiteaPublishGolangApiKey, "")
-	valEnvGiteaPubGolangBaseUrl = env_kit.FetchOsEnvStr(plugin.EnvGiteaPubGolangBaseUrl, "")
-	valEnvGiteaPubGolangInsecure = env_kit.FetchOsEnvBool(plugin.EnvGiteaPubGolangInsecure, false)
-	valEnvGiteaPubGolangDryRun = env_kit.FetchOsEnvBool(plugin.EnvGiteaPubGolangDryRun, true)
-	valEnvGiteaPubGolangPathGo = env_kit.FetchOsEnvStr(plugin.EnvGiteaPubGolangPathGo, "")
-	valEnvGiteaPubGolangRemovePaths = env_kit.FetchOsEnvStringSlice(plugin.EnvGiteaPubGolangRemovePaths)
+	valEnvGiteaPublishGolangApiKey = env_kit.FetchOsEnvStr(gitea_publish_golang.EnvGiteaPublishGolangApiKey, "")
+	valEnvGiteaPubGolangBaseUrl = env_kit.FetchOsEnvStr(gitea_publish_golang.EnvGiteaPubGolangBaseUrl, "")
+	valEnvGiteaPubGolangInsecure = env_kit.FetchOsEnvBool(gitea_publish_golang.EnvGiteaPubGolangInsecure, false)
+	valEnvGiteaPubGolangDryRun = env_kit.FetchOsEnvBool(gitea_publish_golang.EnvGiteaPubGolangDryRun, true)
+	valEnvGiteaPubGolangPathGo = env_kit.FetchOsEnvStr(gitea_publish_golang.EnvGiteaPubGolangPathGo, "")
+	valEnvGiteaPubGolangRemovePaths = env_kit.FetchOsEnvStringSlice(gitea_publish_golang.EnvGiteaPubGolangRemovePaths)
 }
 
 // test case basic tools start
@@ -114,14 +114,14 @@ func envMustArgsCheck(t *testing.T) bool {
 	return false
 }
 
-func generateTransferStepsOut(plugin plugin.Plugin, mark string, data interface{}) error {
+func generateTransferStepsOut(plugin gitea_publish_golang.Plugin, mark string, data interface{}) error {
 	_, err := wd_steps_transfer.Out(plugin.Settings.RootPath, plugin.Settings.StepsTransferPath, plugin.GetWoodPeckerInfo(), mark, data)
 	return err
 }
 
-func mockPluginSettings() plugin.Settings {
+func mockPluginSettings() gitea_publish_golang.Settings {
 	// all mock settings can set here
-	settings := plugin.Settings{
+	settings := gitea_publish_golang.Settings{
 		// use env:PLUGIN_DEBUG
 		Debug:             valEnvPluginDebug,
 		TimeoutSecond:     valEnvTimeoutSecond,
@@ -143,8 +143,8 @@ func mockPluginSettings() plugin.Settings {
 
 }
 
-func mockPluginWithSettings(t *testing.T, woodpeckerInfo wd_info.WoodpeckerInfo, settings plugin.Settings) plugin.Plugin {
-	p := plugin.Plugin{
+func mockPluginWithSettings(t *testing.T, woodpeckerInfo wd_info.WoodpeckerInfo, settings gitea_publish_golang.Settings) gitea_publish_golang.Plugin {
+	p := gitea_publish_golang.Plugin{
 		Name:    mockName,
 		Version: mockVersion,
 	}

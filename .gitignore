@@ -80,7 +80,7 @@ _testmain.go
 .idea/gradle.xml
 .idea/libraries
 
-# Mongo Explorer plugin:
+# Mongo Explorer gitea_publish_golang:
 .idea/mongoSettings.xml
 
 ## File-based project format:
@@ -91,19 +91,19 @@ _testmain.go
 # IntelliJ
 /out/
 
-# mpeltonen/sbt-idea plugin
+# mpeltonen/sbt-idea gitea_publish_golang
 .idea_modules/
 
-# JIRA plugin
+# JIRA gitea_publish_golang
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
+# Crashlytics gitea_publish_golang (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Created by .ignore support plugin (hsz.mobi)
+# Created by .ignore support gitea_publish_golang (hsz.mobi)
 ### Linux template
 *~
 

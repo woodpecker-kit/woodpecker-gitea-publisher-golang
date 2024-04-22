@@ -1,4 +1,4 @@
-package plugin
+package gitea_publish_golang
 
 import (
 	"fmt"
@@ -112,7 +112,7 @@ func argCheckInArr(mark string, target string, checkArr []string) error {
 
 // doBiz
 //
-//	replace this code with your plugin implementation
+//	replace this code with your gitea_publish_golang implementation
 func (p *Plugin) doBiz() error {
 
 	if p.Settings.DryRun {
