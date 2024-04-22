@@ -1,0 +1,28 @@
+{
+  "name": "woodpecker-gitea-publisher-golang",
+  "version": "1.0.0",
+  "description": "template of golang cli tools, and can print basic env info",
+  "directories": {
+    "doc": "doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang.git"
+  },
+  "keywords": [
+    "go",
+    "make",
+    "docker",
+    "action"
+  ],
+  "author": {
+    "name": "woodpecker-kit",
+    "email": "",
+    "url": "https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/issues"
+  },
+  "homepage": "https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang#readme"
+}
