@@ -34,25 +34,25 @@ var (
 	// mustSetInCiEnvList
 	//  for check set in CI env not empty
 	mustSetInCiEnvList = []string{
-		wd_flag.EnvKeyCiSystemPlatform,
-		wd_flag.EnvKeyCiSystemVersion,
+		plugin.EnvGiteaPublishGolangApiKey,
 	}
 
 	// mustSetArgsAsEnvList
 	mustSetArgsAsEnvList = []string{
-		//plugin.EnvStepsTransferDemo,
+		plugin.EnvGiteaPublishGolangApiKey,
 	}
 
-	valEnvTimeoutSecond uint
-	valEnvPluginDebug   = false
-
-	// change or remove test case if valForm env start
-
-	valEnvPaddingLeftMax   = 0
-	valEnvPrinterPrintKeys []string
-
-	// change or remove test case if valForm env end
-
+	valEnvTimeoutSecond             uint
+	valEnvPluginDebug               = false
+	valEnvGiteaPublishGolangApiKey  = ""
+	valEnvGiteaPubGolangBaseUrl     = ""
+	valEnvGiteaPubGolangInsecure    = false
+	valEnvGiteaPubGolangDryRun      = true
+	valEnvGiteaPubGolangPathGo      = ""
+	valEnvGiteaPubGolangRemovePaths = []string{
+		"vendor",
+		"dist",
+	}
 )
 
 func init() {
@@ -66,10 +66,12 @@ func init() {
 	valEnvTimeoutSecond = uint(env_kit.FetchOsEnvInt(wd_flag.EnvKeyPluginTimeoutSecond, 10))
 	valEnvPluginDebug = env_kit.FetchOsEnvBool(wd_flag.EnvKeyPluginDebug, false)
 
-	// change or remove test case if valForm env start
-	valEnvPaddingLeftMax = env_kit.FetchOsEnvInt(plugin.EnvPrinterPaddingLeftMax, 24)
-	valEnvPrinterPrintKeys = env_kit.FetchOsEnvStringSlice(plugin.EnvPrinterPrintKeys)
-	// change or remove test case if valForm env end
+	valEnvGiteaPublishGolangApiKey = env_kit.FetchOsEnvStr(plugin.EnvGiteaPublishGolangApiKey, "")
+	valEnvGiteaPubGolangBaseUrl = env_kit.FetchOsEnvStr(plugin.EnvGiteaPubGolangBaseUrl, "")
+	valEnvGiteaPubGolangInsecure = env_kit.FetchOsEnvBool(plugin.EnvGiteaPubGolangInsecure, false)
+	valEnvGiteaPubGolangDryRun = env_kit.FetchOsEnvBool(plugin.EnvGiteaPubGolangDryRun, true)
+	valEnvGiteaPubGolangPathGo = env_kit.FetchOsEnvStr(plugin.EnvGiteaPubGolangPathGo, "")
+	valEnvGiteaPubGolangRemovePaths = env_kit.FetchOsEnvStringSlice(plugin.EnvGiteaPubGolangRemovePaths)
 }
 
 // test case basic tools start
@@ -129,8 +131,12 @@ func mockPluginSettings() plugin.Settings {
 
 	// change or remove this code for each test case start
 
-	settings.PaddingLeftMax = valEnvPaddingLeftMax
-	settings.EnvPrintKeys = valEnvPrinterPrintKeys
+	settings.DryRun = valEnvGiteaPubGolangDryRun
+	settings.GiteaApiKey = valEnvGiteaPublishGolangApiKey
+	settings.GiteaBaseUrl = valEnvGiteaPubGolangBaseUrl
+	settings.GiteaInsecure = valEnvGiteaPubGolangInsecure
+	settings.PublishPackageGo = valEnvGiteaPubGolangPathGo
+	settings.PublishRemovePaths = valEnvGiteaPubGolangRemovePaths
 
 	// change or remove this code for each test case end
 	return settings

@@ -21,21 +21,18 @@ type (
 		StepsOutDisable   bool
 		RootPath          string
 
-		// change or remove this config demo start
-		NotEmptyEnvKeys   []string
-		EnvPrintKeys      []string
-		PaddingLeftMax    int
-		StepsTransferDemo bool
-		// change or remove this config demo end
+		DryRun             bool
+		GiteaApiKey        string
+		GiteaBaseUrl       string
+		GiteaInsecure      bool
+		GiteaTimeoutSecond uint
 
-		DryRun bool
+		PublishPackageGo   string
+		PublishRemovePaths []string
 	}
 )
 
 var (
-
-	// change or remove settings config check args start
-
 	// pluginBuildStateSupport
 	pluginBuildStateSupport = []string{
 		wd_info.BuildStatusCreated,
@@ -45,6 +42,4 @@ var (
 		wd_info.BuildStatusError,
 		wd_info.BuildStatusKilled,
 	}
-
-	// change or remove settings config check args end
 )

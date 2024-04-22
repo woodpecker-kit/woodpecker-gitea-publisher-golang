@@ -1,6 +1,7 @@
 package plugin
 
 import (
+	"fmt"
 	"github.com/urfave/cli/v2"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_flag"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
@@ -9,66 +10,77 @@ import (
 )
 
 const (
-	// change or remove this code start
+	CliNameGiteaPublishGolangApiKey = "settings.gitea-publish-golang-api-key"
+	EnvGiteaPublishGolangApiKey     = "PLUGIN_GITEA_PUBLISH_GOLANG_API_KEY"
 
-	CliNameNotEmptyEnvs = "settings.not-empty-envs"
-	EnvNotEmptyEnvs     = "PLUGIN_NOT_EMPTY_ENVS"
+	CliNameGiteaPubGolangBaseUrl = "settings.gitea-publish-golang-base-url"
+	EnvGiteaPubGolangBaseUrl     = "PLUGIN_GITEA_PUBLISH_GOLANG_BASE_URL"
 
-	CliNamePrinterPrintKeys = "settings.env-printer-print-keys"
-	EnvPrinterPrintKeys     = "PLUGIN_ENV_PRINTER_PRINT_KEYS"
+	CliNameGiteaPubGolangInsecure = "settings.gitea-publish-golang-insecure"
+	EnvGiteaPubGolangInsecure     = "PLUGIN_GITEA_PUBLISH_GOLANG_INSECURE"
 
-	CliNamePrinterPaddingLeftMax = "settings.env-printer-padding-left-max"
-	EnvPrinterPaddingLeftMax     = "PLUGIN_ENV_PRINTER_PADDING_LEFT_MAX"
+	CliNameGiteaPubGolangDryRun = "settings.gitea-publish-golang-dry-run"
+	EnvGiteaPubGolangDryRun     = "PLUGIN_GITEA_PUBLISH_GOLANG_DRY_RUN"
 
-	CliNameStepsTransferDemo = "settings.steps-transfer-demo"
-	EnvStepsTransferDemo     = "PLUGIN_STEPS_TRANSFER_DEMO"
+	CliNameGiteaPubGolangPathGo = "settings.gitea-publish-golang-path-go"
+	EnvGiteaPubGolangPathGo     = "PLUGIN_GITEA_PUBLISH_GOLANG_PATH_GO"
 
-	// change or remove this code end
+	CliNameGiteaPubGolangRemovePaths = "settings.gitea-publish-golang-remove-paths"
+	EnvGiteaPubGolangRemovePaths     = "PLUGIN_GITEA_PUBLISH_GOLANG_REMOVE_PATHS"
 )
 
 // GlobalFlag
 // Other modules also have flags
 func GlobalFlag() []cli.Flag {
 	return []cli.Flag{
-
-		// change or remove start
-
-		// new flag string template if no use, please replace this start
-		&cli.StringSliceFlag{
-			Name:    CliNameNotEmptyEnvs,
-			Usage:   "if use this args, will check envs must not empty, fail will exit not 0",
-			EnvVars: []string{EnvNotEmptyEnvs},
+		&cli.StringFlag{
+			Name:    CliNameGiteaPublishGolangApiKey,
+			Usage:   "gitea api key, Required",
+			EnvVars: []string{EnvGiteaPublishGolangApiKey},
 		},
-		&cli.StringSliceFlag{
-			Name:    CliNamePrinterPrintKeys,
-			Usage:   "if use this args, will print env by keys",
-			EnvVars: []string{EnvPrinterPrintKeys},
-		},
-		&cli.IntFlag{
-			Name:    CliNamePrinterPaddingLeftMax,
-			Usage:   "set env printer padding left max count, minimum 24, default 32",
-			EnvVars: []string{EnvPrinterPaddingLeftMax},
-			Value:   32,
+		&cli.StringFlag{
+			Name:    CliNameGiteaPubGolangBaseUrl,
+			Usage:   fmt.Sprintf("gitea base url, when `%s` is `gitea`, and this flag is empty, will try get from `%s`", wd_flag.EnvKeyCiForgeType, wd_flag.EnvKeyCiForgeUrl),
+			EnvVars: []string{EnvGiteaPubGolangBaseUrl},
 		},
 		&cli.BoolFlag{
-			Name:    CliNameStepsTransferDemo,
-			Usage:   "if use this args, will print steps transfer demo",
-			EnvVars: []string{EnvStepsTransferDemo},
+			Name:    CliNameGiteaPubGolangInsecure,
+			Usage:   "visit base-url via insecure https protocol",
+			EnvVars: []string{EnvGiteaPubGolangInsecure},
 		},
-		// env_printer_plugin end
-		//&cli.StringFlag{
-		//	Name:    "settings.new_arg",
-		//	Usage:   "",
-		//	EnvVars: []string{"PLUGIN_new_arg"},
-		//},
-		// new flag string template if no use, please replace this end
-
-		// change or remove end
+		&cli.BoolFlag{
+			Name:    CliNameGiteaPubGolangDryRun,
+			Usage:   "dry run mode, will not publish",
+			EnvVars: []string{EnvGiteaPubGolangDryRun},
+		},
+		&cli.StringFlag{
+			Name:    CliNameGiteaPubGolangPathGo,
+			Usage:   "publish go package is dir to find go.mod, if not set will use git root path, gitea 1.20.1+ support",
+			EnvVars: []string{EnvGiteaPubGolangPathGo},
+		},
+		&cli.StringSliceFlag{
+			Name:    CliNameGiteaPubGolangRemovePaths,
+			Usage:   fmt.Sprintf("publish go package remove paths, this path under %s, vars like dist,target/os", CliNameGiteaPubGolangRemovePaths),
+			EnvVars: []string{EnvGiteaPubGolangRemovePaths},
+		},
 	}
 }
 
+const (
+	CliNameGiteaPubGolangTimeoutSecond = "settings.gitea-publish-golang-timeout-second"
+	EvnGiteaPubGolangTimeoutSecond     = "PLUGIN_GITEA_PUBLISH_GOLANG_TIMEOUT_SECOND"
+)
+
 func HideGlobalFlag() []cli.Flag {
-	return []cli.Flag{}
+	return []cli.Flag{
+		&cli.UintFlag{
+			Name:    CliNameGiteaPubGolangTimeoutSecond,
+			Usage:   "gitea release api timeout second, default 60, less 30",
+			Value:   60,
+			Hidden:  true,
+			EnvVars: []string{EvnGiteaPubGolangTimeoutSecond},
+		},
+	}
 }
 
 func BindCliFlags(c *cli.Context,
@@ -86,25 +98,25 @@ func BindCliFlags(c *cli.Context,
 		StepsOutDisable:   stepsOutDisable,
 		RootPath:          rootPath,
 
-		// change or remove this code start
-		NotEmptyEnvKeys:   c.StringSlice(CliNameNotEmptyEnvs),
-		EnvPrintKeys:      c.StringSlice(CliNamePrinterPrintKeys),
-		PaddingLeftMax:    c.Int(CliNamePrinterPaddingLeftMax),
-		StepsTransferDemo: c.Bool(CliNameStepsTransferDemo),
-		// change or remove this code end
+		DryRun: c.Bool(CliNameGiteaPubGolangDryRun),
+
+		GiteaApiKey:        c.String(CliNameGiteaPublishGolangApiKey),
+		GiteaBaseUrl:       c.String(CliNameGiteaPubGolangBaseUrl),
+		GiteaInsecure:      c.Bool(CliNameGiteaPubGolangInsecure),
+		GiteaTimeoutSecond: c.Uint(CliNameGiteaPubGolangTimeoutSecond),
+
+		PublishPackageGo:   c.String(CliNameGiteaPubGolangPathGo),
+		PublishRemovePaths: c.StringSlice(CliNameGiteaPubGolangRemovePaths),
 	}
 
 	// set default TimeoutSecond
 	if config.TimeoutSecond == 0 {
 		config.TimeoutSecond = 10
 	}
-
-	// change or remove start
-
-	// set default PaddingLeftMax
-	if config.PaddingLeftMax < 24 {
-		config.PaddingLeftMax = 24
+	if config.GiteaTimeoutSecond < 30 {
+		config.GiteaTimeoutSecond = 30
 	}
+
 	// change or remove start
 
 	wd_log.Debugf("args %s: %v", wd_flag.NameCliPluginTimeoutSecond, config.TimeoutSecond)

@@ -24,6 +24,7 @@ func TestCheckArgsPlugin(t *testing.T) {
 		wd_mock.FastCurrentStatus(wd_info.BuildStatusSuccess),
 	)
 	successArgsSettings := mockPluginSettings()
+	successArgsSettings.GiteaApiKey = "foo key"
 
 	// notSupport
 	notSupportWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
