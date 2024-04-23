@@ -114,7 +114,7 @@ func envMustArgsCheck(t *testing.T) bool {
 	return false
 }
 
-func generateTransferStepsOut(plugin gitea_publish_golang.Plugin, mark string, data interface{}) error {
+func generateTransferStepsOut(plugin gitea_publish_golang.GiteaPublishGolang, mark string, data interface{}) error {
 	_, err := wd_steps_transfer.Out(plugin.Settings.RootPath, plugin.Settings.StepsTransferPath, plugin.GetWoodPeckerInfo(), mark, data)
 	return err
 }
@@ -129,22 +129,19 @@ func mockPluginSettings() gitea_publish_golang.Settings {
 		StepsTransferPath: wd_steps_transfer.DefaultKitStepsFileName,
 	}
 
-	// change or remove this code for each test case start
-
 	settings.DryRun = valEnvGiteaPubGolangDryRun
 	settings.GiteaApiKey = valEnvGiteaPublishGolangApiKey
 	settings.GiteaBaseUrl = valEnvGiteaPubGolangBaseUrl
 	settings.GiteaInsecure = valEnvGiteaPubGolangInsecure
-	settings.PublishPackageGo = valEnvGiteaPubGolangPathGo
+	settings.PublishPackageGoPath = valEnvGiteaPubGolangPathGo
 	settings.PublishRemovePaths = valEnvGiteaPubGolangRemovePaths
 
-	// change or remove this code for each test case end
 	return settings
 
 }
 
-func mockPluginWithSettings(t *testing.T, woodpeckerInfo wd_info.WoodpeckerInfo, settings gitea_publish_golang.Settings) gitea_publish_golang.Plugin {
-	p := gitea_publish_golang.Plugin{
+func mockPluginWithSettings(t *testing.T, woodpeckerInfo wd_info.WoodpeckerInfo, settings gitea_publish_golang.Settings) gitea_publish_golang.GiteaPublishGolang {
+	p := gitea_publish_golang.GiteaPublishGolang{
 		Name:    mockName,
 		Version: mockVersion,
 	}

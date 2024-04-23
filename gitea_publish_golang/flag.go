@@ -7,6 +7,7 @@ import (
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_short_info"
+	"path/filepath"
 )
 
 const (
@@ -27,6 +28,12 @@ const (
 
 	CliNameGiteaPubGolangRemovePaths = "settings.gitea-publish-golang-remove-paths"
 	EnvGiteaPubGolangRemovePaths     = "PLUGIN_GITEA_PUBLISH_GOLANG_REMOVE_PATHS"
+
+	CliNameGiteaPubGolangUpdateResultRootPath = "settings.gitea-publish-golang-update-result-root-path"
+	EnvGiteaPubGolangUpdateResultRootPath     = "PLUGIN_GITEA_PUBLISH_GOLANG_UPDATE_RESULT_ROOT_PATH"
+
+	CliNameGiteaPubGolangUpdateResultFileName = "settings.gitea-publish-golang-update-result-file-name"
+	EnvGiteaPubGolangUpdateResultFileName     = "PLUGIN_GITEA_PUBLISH_GOLANG_UPDATE_RESULT_FILE_NAME"
 )
 
 // GlobalFlag
@@ -60,8 +67,21 @@ func GlobalFlag() []cli.Flag {
 		},
 		&cli.StringSliceFlag{
 			Name:    CliNameGiteaPubGolangRemovePaths,
-			Usage:   fmt.Sprintf("publish go package remove paths, this path under %s, vars like dist,target/os", CliNameGiteaPubGolangRemovePaths),
+			Usage:   "publish go package remove paths, this path under [ gitea-publish-golang-path-go ], vars like dist,target/os",
+			Value:   cli.NewStringSlice("dist"),
 			EnvVars: []string{EnvGiteaPubGolangRemovePaths},
+		},
+		&cli.StringFlag{
+			Name:    CliNameGiteaPubGolangUpdateResultRootPath,
+			Usage:   "update result root path, `this path must under workspace`, default is: dist",
+			Value:   "dist",
+			EnvVars: []string{EnvGiteaPubGolangUpdateResultRootPath},
+		},
+		&cli.StringFlag{
+			Name:    CliNameGiteaPubGolangUpdateResultFileName,
+			Usage:   "update result file name, default is: go-mod-upload.json",
+			Value:   "go-mod-upload.json",
+			EnvVars: []string{EnvGiteaPubGolangUpdateResultFileName},
 		},
 	}
 }
@@ -69,6 +89,9 @@ func GlobalFlag() []cli.Flag {
 const (
 	CliNameGiteaPubGolangTimeoutSecond = "settings.gitea-publish-golang-timeout-second"
 	EvnGiteaPubGolangTimeoutSecond     = "PLUGIN_GITEA_PUBLISH_GOLANG_TIMEOUT_SECOND"
+
+	CliNameGiteaPubGolangZipRootPath = "settings.gitea-publish-golang-zip-root-path"
+	EnvGiteaPubGolangZipRootPath     = "PLUGIN_GITEA_PUBLISH_GOLANG_ZIP_ROOT_PATH"
 )
 
 func HideGlobalFlag() []cli.Flag {
@@ -80,6 +103,12 @@ func HideGlobalFlag() []cli.Flag {
 			Hidden:  true,
 			EnvVars: []string{EvnGiteaPubGolangTimeoutSecond},
 		},
+		&cli.StringFlag{
+			Name:    CliNameGiteaPubGolangZipRootPath,
+			Usage:   "gitea publish golang zip root path, default is parent for CI_WORKSPACE",
+			Hidden:  true,
+			EnvVars: []string{EnvGiteaPubGolangZipRootPath},
+		},
 	}
 }
 
@@ -89,8 +118,14 @@ func BindCliFlags(c *cli.Context,
 	wdInfo *wd_info.WoodpeckerInfo,
 	rootPath,
 	stepsTransferPath string, stepsOutDisable bool,
-) (*Plugin, error) {
+) (*GiteaPublishGolang, error) {
 
+	zipRootPath := c.String(CliNameGiteaPubGolangZipRootPath)
+	if zipRootPath == "" {
+		zipRootPath = filepath.Dir(rootPath)
+	}
+
+	saveUploadResultRoot := filepath.Join(rootPath, c.String(CliNameGiteaPubGolangUpdateResultRootPath))
 	config := Settings{
 		Debug:             debug,
 		TimeoutSecond:     c.Uint(wd_flag.NameCliPluginTimeoutSecond),
@@ -105,8 +140,12 @@ func BindCliFlags(c *cli.Context,
 		GiteaInsecure:      c.Bool(CliNameGiteaPubGolangInsecure),
 		GiteaTimeoutSecond: c.Uint(CliNameGiteaPubGolangTimeoutSecond),
 
-		PublishPackageGo:   c.String(CliNameGiteaPubGolangPathGo),
-		PublishRemovePaths: c.StringSlice(CliNameGiteaPubGolangRemovePaths),
+		PublishPackageGoPath: c.String(CliNameGiteaPubGolangPathGo),
+		ZipTargetRootPath:    zipRootPath,
+		PublishRemovePaths:   c.StringSlice(CliNameGiteaPubGolangRemovePaths),
+
+		ResultUploadRootPath: saveUploadResultRoot,
+		ResultUploadFileName: c.String(CliNameGiteaPubGolangUpdateResultFileName),
 	}
 
 	// set default TimeoutSecond
@@ -123,7 +162,7 @@ func BindCliFlags(c *cli.Context,
 
 	infoShort := wd_short_info.ParseWoodpeckerInfo2Short(*wdInfo)
 
-	p := Plugin{
+	p := GiteaPublishGolang{
 		Name:           cliName,
 		Version:        cliVersion,
 		woodpeckerInfo: wdInfo,

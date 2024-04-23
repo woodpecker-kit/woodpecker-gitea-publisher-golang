@@ -2,16 +2,6 @@ package gitea_publish_golang
 
 import "github.com/woodpecker-kit/woodpecker-tools/wd_info"
 
-const (
-	// change or remove settings config const start
-
-	// StepsTransferMarkDemoConfig
-	// steps transfer key
-	StepsTransferMarkDemoConfig = "demo_config"
-
-	// change or remove settings config const end
-)
-
 type (
 	// Settings gitea_publish_golang private config
 	Settings struct {
@@ -27,8 +17,11 @@ type (
 		GiteaInsecure      bool
 		GiteaTimeoutSecond uint
 
-		PublishPackageGo   string
-		PublishRemovePaths []string
+		PublishPackageGoPath string
+		ZipTargetRootPath    string
+		PublishRemovePaths   []string
+		ResultUploadRootPath string
+		ResultUploadFileName string
 	}
 )
 

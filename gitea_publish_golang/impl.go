@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"github.com/sinlov-go/go-common-lib/pkg/string_tools"
 	"github.com/sinlov-go/go-common-lib/pkg/struct_kit"
-	"github.com/woodpecker-kit/woodpecker-tools/wd_flag"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_short_info"
 )
 
-func (p *Plugin) ShortInfo() wd_short_info.WoodpeckerInfoShort {
+func (p *GiteaPublishGolang) ShortInfo() wd_short_info.WoodpeckerInfoShort {
 	if p.wdShortInfo == nil {
 		info2Short := wd_short_info.ParseWoodpeckerInfo2Short(*p.woodpeckerInfo)
 		p.wdShortInfo = &info2Short
@@ -20,7 +19,7 @@ func (p *Plugin) ShortInfo() wd_short_info.WoodpeckerInfoShort {
 
 // SetWoodpeckerInfo
 // also change ShortInfo() return
-func (p *Plugin) SetWoodpeckerInfo(info wd_info.WoodpeckerInfo) {
+func (p *GiteaPublishGolang) SetWoodpeckerInfo(info wd_info.WoodpeckerInfo) {
 	var newInfo wd_info.WoodpeckerInfo
 	_ = struct_kit.DeepCopyByGob(&info, &newInfo)
 	p.woodpeckerInfo = &newInfo
@@ -28,15 +27,15 @@ func (p *Plugin) SetWoodpeckerInfo(info wd_info.WoodpeckerInfo) {
 	p.wdShortInfo = &info2Short
 }
 
-func (p *Plugin) GetWoodPeckerInfo() wd_info.WoodpeckerInfo {
+func (p *GiteaPublishGolang) GetWoodPeckerInfo() wd_info.WoodpeckerInfo {
 	return *p.woodpeckerInfo
 }
 
-func (p *Plugin) OnlyArgsCheck() {
+func (p *GiteaPublishGolang) OnlyArgsCheck() {
 	p.onlyArgsCheck = true
 }
 
-func (p *Plugin) Exec() error {
+func (p *GiteaPublishGolang) Exec() error {
 	errLoadStepsTransfer := p.loadStepsTransfer()
 	if errLoadStepsTransfer != nil {
 		return errLoadStepsTransfer
@@ -64,7 +63,7 @@ func (p *Plugin) Exec() error {
 	return nil
 }
 
-func (p *Plugin) loadStepsTransfer() error {
+func (p *GiteaPublishGolang) loadStepsTransfer() error {
 	// change or remove or this code start
 	//if p.Settings.StepsTransferDemo {
 	//	var readConfigData Settings
@@ -78,7 +77,7 @@ func (p *Plugin) loadStepsTransfer() error {
 	return nil
 }
 
-func (p *Plugin) checkArgs() error {
+func (p *GiteaPublishGolang) checkArgs() error {
 
 	errCheck := argCheckInArr("build status", p.woodpeckerInfo.CurrentInfo.CurrentPipelineInfo.CiPipelineStatus, pluginBuildStateSupport)
 	if errCheck != nil {
@@ -113,17 +112,17 @@ func argCheckInArr(mark string, target string, checkArr []string) error {
 // doBiz
 //
 //	replace this code with your gitea_publish_golang implementation
-func (p *Plugin) doBiz() error {
+func (p *GiteaPublishGolang) doBiz() error {
 
-	if p.Settings.DryRun {
-		wd_log.Verbosef("dry run, skip some biz code, more info can open debug by flag [ %s ]", wd_flag.EnvKeyPluginDebug)
-		return nil
+	err := p.publishByClient()
+	if err != nil {
+		return err
 	}
 
 	return nil
 }
 
-func (p *Plugin) saveStepsTransfer() error {
+func (p *GiteaPublishGolang) saveStepsTransfer() error {
 	// change or remove this code
 
 	if p.Settings.StepsOutDisable {
