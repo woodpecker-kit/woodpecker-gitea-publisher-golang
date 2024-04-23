@@ -50,8 +50,8 @@ func (p *GiteaPublishGolang) publishByClient() error {
 
 	wd_log.DebugJsonf(packageGoUpload, "packageGoUpload res")
 
-	saveUploadFilePath := filepath.Join(p.Settings.ResultUploadRootPath, p.Settings.ResultUploadFileName)
-	errSaveResult := filepath_plus.WriteFileAsJsonBeauty(saveUploadFilePath, packageGoUpload, false)
+	saveUploadFilePath := filepath.Join(p.Settings.resultRootFullPath, p.Settings.ResultUploadFileName)
+	errSaveResult := filepath_plus.WriteFileAsJsonBeauty(saveUploadFilePath, packageGoUpload, true)
 	if errSaveResult != nil {
 		p.cleanZipTargetRootPath()
 		return errSaveResult

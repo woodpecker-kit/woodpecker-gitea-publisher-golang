@@ -22,6 +22,8 @@ type (
 		findOutGoModPath     string
 		PublishRemovePaths   []string
 		ResultUploadRootPath string
+		// resultRootFullPath is the root path of result with check args success
+		resultRootFullPath   string
 		ResultUploadFileName string
 
 		// PublishPackageVersion is the version to publish this by check args success will init by tag or latest

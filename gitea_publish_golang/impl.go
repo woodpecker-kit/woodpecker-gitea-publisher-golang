@@ -108,7 +108,9 @@ func (p *GiteaPublishGolang) checkArgs() error {
 
 	p.Settings.PublishPackageVersion = version
 
+	// append path
 	p.Settings.findOutGoModPath = filepath.Join(p.Settings.RootPath, p.Settings.PublishPackageGoPath)
+	p.Settings.resultRootFullPath = filepath.Join(p.Settings.RootPath, p.Settings.ResultUploadRootPath)
 
 	tempDir := os.TempDir()
 	shortInfo := p.ShortInfo()

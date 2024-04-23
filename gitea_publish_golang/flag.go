@@ -7,7 +7,6 @@ import (
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_short_info"
-	"path/filepath"
 )
 
 const (
@@ -73,7 +72,7 @@ func GlobalFlag() []cli.Flag {
 		},
 		&cli.StringFlag{
 			Name:    CliNameGiteaPubGolangUpdateResultRootPath,
-			Usage:   "update result root path, `this path must under workspace`, default is: dist",
+			Usage:   "out result root path append CI Workspace, default `dist`",
 			Value:   "dist",
 			EnvVars: []string{EnvGiteaPubGolangUpdateResultRootPath},
 		},
@@ -111,7 +110,6 @@ func BindCliFlags(c *cli.Context,
 	stepsTransferPath string, stepsOutDisable bool,
 ) (*GiteaPublishGolang, error) {
 
-	saveUploadResultRoot := filepath.Join(rootPath, c.String(CliNameGiteaPubGolangUpdateResultRootPath))
 	config := Settings{
 		Debug:             debug,
 		TimeoutSecond:     c.Uint(wd_flag.NameCliPluginTimeoutSecond),
@@ -129,7 +127,7 @@ func BindCliFlags(c *cli.Context,
 		PublishPackageGoPath: c.String(CliNameGiteaPubGolangPathGo),
 		PublishRemovePaths:   c.StringSlice(CliNameGiteaPubGolangRemovePaths),
 
-		ResultUploadRootPath: saveUploadResultRoot,
+		ResultUploadRootPath: c.String(CliNameGiteaPubGolangUpdateResultRootPath),
 		ResultUploadFileName: c.String(CliNameGiteaPubGolangUpdateResultFileName),
 	}
 
