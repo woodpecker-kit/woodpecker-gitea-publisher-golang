@@ -50,9 +50,18 @@ var (
 	valEnvGiteaPubGolangDryRun      = true
 	valEnvGiteaPubGolangPathGo      = ""
 	valEnvGiteaPubGolangRemovePaths = []string{
-		"vendor",
 		"dist",
 	}
+	valEnvGiteaPubGolangLatest = true
+
+	// CI Test Env
+
+	valCiRepoName   = ""
+	valCiRepoOwner  = ""
+	valCiSystemHost = ""
+	valCiSystemUrl  = ""
+	valCiForgeType  = "gitea"
+	valCiForgeUrl   = ""
 )
 
 func init() {
@@ -63,6 +72,13 @@ func init() {
 
 	testGoldenKit = unittest_file_kit.NewTestGoldenKit(testBaseFolderPath)
 
+	valCiRepoName = env_kit.FetchOsEnvStr(wd_flag.EnvKeyRepositoryCiName, "")
+	valCiRepoOwner = env_kit.FetchOsEnvStr(wd_flag.EnvKeyRepositoryCiOwner, "")
+	valCiSystemHost = env_kit.FetchOsEnvStr(wd_flag.EnvKeyCiSystemHost, "")
+	valCiSystemUrl = env_kit.FetchOsEnvStr(wd_flag.EnvKeyCiSystemUrl, "")
+	valCiForgeType = env_kit.FetchOsEnvStr(wd_flag.EnvKeyCiForgeType, "gitea")
+	valCiForgeUrl = env_kit.FetchOsEnvStr(wd_flag.EnvKeyCiForgeUrl, "")
+
 	valEnvTimeoutSecond = uint(env_kit.FetchOsEnvInt(wd_flag.EnvKeyPluginTimeoutSecond, 10))
 	valEnvPluginDebug = env_kit.FetchOsEnvBool(wd_flag.EnvKeyPluginDebug, false)
 
@@ -71,7 +87,10 @@ func init() {
 	valEnvGiteaPubGolangInsecure = env_kit.FetchOsEnvBool(gitea_publish_golang.EnvGiteaPubGolangInsecure, false)
 	valEnvGiteaPubGolangDryRun = env_kit.FetchOsEnvBool(gitea_publish_golang.EnvGiteaPubGolangDryRun, true)
 	valEnvGiteaPubGolangPathGo = env_kit.FetchOsEnvStr(gitea_publish_golang.EnvGiteaPubGolangPathGo, "")
-	valEnvGiteaPubGolangRemovePaths = env_kit.FetchOsEnvStringSlice(gitea_publish_golang.EnvGiteaPubGolangRemovePaths)
+	removePathsEnv := env_kit.FetchOsEnvStringSlice(gitea_publish_golang.EnvGiteaPubGolangRemovePaths)
+	if len(removePathsEnv) > 0 {
+		valEnvGiteaPubGolangRemovePaths = removePathsEnv
+	}
 }
 
 // test case basic tools start
@@ -148,6 +167,7 @@ func mockPluginWithSettings(t *testing.T, woodpeckerInfo wd_info.WoodpeckerInfo,
 
 	// mock woodpecker info
 	//t.Log("mockPluginWithStatus")
+
 	p.SetWoodpeckerInfo(woodpeckerInfo)
 
 	if p.ShortInfo().Build.WorkSpace != "" {

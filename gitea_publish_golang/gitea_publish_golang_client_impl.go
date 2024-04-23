@@ -60,7 +60,7 @@ func (p *publishGolangClient) RemotePackageGoFetch(version string) (*GiteaPackag
 	return &giteaPackage, nil
 }
 
-func (p *publishGolangClient) CreateGoModZip(zipRootPath string, goModRootPath string, removePath []string) error {
+func (p *publishGolangClient) CreateGoModZip(version string, zipRootPath string, goModRootPath string, removePath []string) error {
 	if p.goModZip == nil {
 		return fmt.Errorf("CreateGoModZip go.mod not loaded by LocalPackageGoFetch")
 	}
@@ -76,7 +76,17 @@ func (p *publishGolangClient) CreateGoModZip(zipRootPath string, goModRootPath s
 			wd_log.Infof("CreateGoModZip removePath success: %s", removeFullPath)
 		}
 	}
-	errCreateZip := p.goModZip.CreateGoModeZipPackageFile(zipRootPath)
+
+	if p.dryRun && version == "latest" {
+		wd_log.Infof("CreateGoModZip dryRun mode")
+		wd_log.Infof("CreateGoModZip version: %s\n", version)
+		wd_log.Infof("CreateGoModZip zipRootPath: %s\n", zipRootPath)
+		wd_log.Infof("CreateGoModZip goModRootPath: %s\n", goModRootPath)
+		p.zipUploadPath = filepath.Join(zipRootPath, fmt.Sprintf("%s.zip", version))
+		return nil
+	}
+
+	errCreateZip := p.goModZip.CreateGoModeZipPackageFile(zipRootPath, version)
 	if errCreateZip != nil {
 		return fmt.Errorf("CreateGoModZip CreateGoModeZipPackageFile err: %v", errCreateZip)
 	}
@@ -94,6 +104,7 @@ func (p *publishGolangClient) PackageGoUpload() (*PublishPackageGoInfo, error) {
 	}
 	pkgName := p.goModZip.GetGoModPackageName()
 	pkgVersion := p.tag
+	goVersion := p.goModZip.GetGoModeGoVersion()
 	res := &PublishPackageGoInfo{
 		ModVersion: module.Version{
 			Path:    pkgName,
@@ -101,6 +112,17 @@ func (p *publishGolangClient) PackageGoUpload() (*PublishPackageGoInfo, error) {
 		},
 	}
 	wd_log.Debugf("try PackageGoUpload outZipPath: %s", p.zipUploadPath)
+	uploadPath := fmt.Sprintf("/api/packages/%s/go/upload", p.owner)
+	if p.dryRun {
+		wd_log.Infof("PackageGoUpload dryRun")
+		wd_log.Infof("PackageGoUpload upload file Path: %s\n", p.zipUploadPath)
+		wd_log.Infof("PackageGoUpload upload url Path: %s\n", uploadPath)
+		wd_log.Infof("PackageGoUpload pkgName: %s\n", pkgName)
+		wd_log.Infof("PackageGoUpload pkgVersion: %s\n", pkgVersion)
+		wd_log.Infof("PackageGoUpload goVersion: %s\n", goVersion)
+		return res, nil
+	}
+
 	fileBodyIO, errOpen := os.Open(p.zipUploadPath)
 	if errOpen != nil {
 		return res, fmt.Errorf("open zip file %s , error: %s", p.zipUploadPath, errOpen)
@@ -112,12 +134,6 @@ func (p *publishGolangClient) PackageGoUpload() (*PublishPackageGoInfo, error) {
 		}
 	}(fileBodyIO)
 
-	uploadPath := fmt.Sprintf("/api/packages/%s/go/upload", p.owner)
-	if p.dryRun {
-		wd_log.Infof("PackageGoUpload dryRun: %s\n", p.zipUploadPath)
-		wd_log.Infof("PackageGoUpload uploadPath: %s%s\n", p.GetBaseUrl(), uploadPath)
-		return res, nil
-	}
 	statusCode, errPutGoPackage := p.ApiGiteaStatusCode(http.MethodPut, uploadPath, nil, fileBodyIO)
 	if errPutGoPackage != nil {
 		return res, fmt.Errorf("PackageGoUpload upload file %s , error: %s", p.zipUploadPath, errPutGoPackage)
@@ -127,6 +143,7 @@ func (p *publishGolangClient) PackageGoUpload() (*PublishPackageGoInfo, error) {
 	}
 	res.Version = pkgVersion
 	res.PackageName = pkgName
+	res.GoModGoVersion = goVersion
 	res.UploadTimeUnix = time.Now().Unix()
 	res.HostName = p.targetHostName
 

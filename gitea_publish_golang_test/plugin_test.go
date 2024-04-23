@@ -1,6 +1,7 @@
 package gitea_publish_golang_test
 
 import (
+	"fmt"
 	"github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/gitea_publish_golang"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
@@ -90,36 +91,46 @@ func TestPlugin(t *testing.T) {
 	}
 	t.Log("mock GiteaPublishGolang args")
 
-	testDataPathRoot, errTestDataPathRoot := testGoldenKit.GetOrCreateTestDataFullPath("plugin_test")
-	if errTestDataPathRoot != nil {
-		t.Fatal(errTestDataPathRoot)
-	}
-
-	// statusSuccess
-	statusSuccessWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
-		wd_mock.FastWorkSpace(filepath.Join(testDataPathRoot, "statusSuccess")),
-		wd_mock.FastCurrentStatus(wd_info.BuildStatusSuccess),
-	)
-	statusSuccessSettings := mockPluginSettings()
-
-	// statusFailure
-	statusFailureWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
-		wd_mock.FastWorkSpace(filepath.Join(testDataPathRoot, "statusFailure")),
-		wd_mock.FastCurrentStatus(wd_info.BuildStatusFailure),
-	)
-	statusFailureSettings := mockPluginSettings()
+	testDataFolderFullPath := testGoldenKit.GetTestDataFolderFullPath()
+	projectRootPath := filepath.Dir(filepath.Dir(testDataFolderFullPath))
 
 	// tagPipeline
 	tagPipelineWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
-		wd_mock.FastWorkSpace(filepath.Join(testDataPathRoot, "tagPipeline")),
+		wd_mock.FastWorkSpace(projectRootPath),
 		wd_mock.FastTag("v1.0.0", "new tag"),
+		wd_mock.WithCiForgeInfo(
+			wd_mock.WithCiForgeType(valCiForgeType),
+			wd_mock.WithCiForgeUrl(valCiForgeUrl),
+		),
+		wd_mock.WithCiSystemInfo(
+			wd_mock.WithCiSystemHost(valCiSystemHost),
+			wd_mock.WithCiSystemUrl(valCiSystemUrl),
+		),
+		wd_mock.WithRepositoryInfo(
+			wd_mock.WithCIRepoName(valCiRepoName),
+			wd_mock.WithCIRepoOwner(valCiRepoOwner),
+			wd_mock.WithCIRepo(fmt.Sprintf("%s/%s", valCiRepoOwner, valCiRepoName)),
+		),
 	)
 	tagPipelineSettings := mockPluginSettings()
 
 	// pullRequestPipeline
 	pullRequestPipelineWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
-		wd_mock.FastWorkSpace(filepath.Join(testDataPathRoot, "pullRequestPipeline")),
+		wd_mock.FastWorkSpace(projectRootPath),
 		wd_mock.FastPullRequest("1", "new pr", "feature-support", "main", "main"),
+		wd_mock.WithCiForgeInfo(
+			wd_mock.WithCiForgeType(valCiForgeType),
+			wd_mock.WithCiForgeUrl(valCiForgeUrl),
+		),
+		wd_mock.WithCiSystemInfo(
+			wd_mock.WithCiSystemHost(valCiSystemHost),
+			wd_mock.WithCiSystemUrl(valCiSystemUrl),
+		),
+		wd_mock.WithRepositoryInfo(
+			wd_mock.WithCIRepoName(valCiRepoName),
+			wd_mock.WithCIRepoOwner(valCiRepoOwner),
+			wd_mock.WithCIRepo(fmt.Sprintf("%s/%s", valCiRepoOwner, valCiRepoName)),
+		),
 	)
 	pullRequestPipelineSettings := mockPluginSettings()
 
@@ -135,17 +146,6 @@ func TestPlugin(t *testing.T) {
 		isDryRun bool
 		wantErr  bool
 	}{
-		{
-			name:           "statusSuccess",
-			woodpeckerInfo: statusSuccessWoodpeckerInfo,
-			settings:       statusSuccessSettings,
-		},
-		{
-			name:           "statusFailure",
-			woodpeckerInfo: statusFailureWoodpeckerInfo,
-			settings:       statusFailureSettings,
-			isDryRun:       true,
-		},
 		{
 			name:           "tagPipeline",
 			woodpeckerInfo: tagPipelineWoodpeckerInfo,

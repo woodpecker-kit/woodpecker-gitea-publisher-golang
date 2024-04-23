@@ -7,7 +7,6 @@ import (
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_short_info"
-	"path/filepath"
 )
 
 const (
@@ -62,7 +61,7 @@ func GlobalFlag() []cli.Flag {
 		},
 		&cli.StringFlag{
 			Name:    CliNameGiteaPubGolangPathGo,
-			Usage:   "publish go package is dir to find go.mod, if not set will use git root path, gitea 1.20.1+ support",
+			Usage:   "publish go package is dir to find go.mod, will append project root path, default is this project root path",
 			EnvVars: []string{EnvGiteaPubGolangPathGo},
 		},
 		&cli.StringSliceFlag{
@@ -73,7 +72,7 @@ func GlobalFlag() []cli.Flag {
 		},
 		&cli.StringFlag{
 			Name:    CliNameGiteaPubGolangUpdateResultRootPath,
-			Usage:   "update result root path, `this path must under workspace`, default is: dist",
+			Usage:   "out result root path append CI Workspace, default `dist`",
 			Value:   "dist",
 			EnvVars: []string{EnvGiteaPubGolangUpdateResultRootPath},
 		},
@@ -89,9 +88,6 @@ func GlobalFlag() []cli.Flag {
 const (
 	CliNameGiteaPubGolangTimeoutSecond = "settings.gitea-publish-golang-timeout-second"
 	EvnGiteaPubGolangTimeoutSecond     = "PLUGIN_GITEA_PUBLISH_GOLANG_TIMEOUT_SECOND"
-
-	CliNameGiteaPubGolangZipRootPath = "settings.gitea-publish-golang-zip-root-path"
-	EnvGiteaPubGolangZipRootPath     = "PLUGIN_GITEA_PUBLISH_GOLANG_ZIP_ROOT_PATH"
 )
 
 func HideGlobalFlag() []cli.Flag {
@@ -102,12 +98,6 @@ func HideGlobalFlag() []cli.Flag {
 			Value:   60,
 			Hidden:  true,
 			EnvVars: []string{EvnGiteaPubGolangTimeoutSecond},
-		},
-		&cli.StringFlag{
-			Name:    CliNameGiteaPubGolangZipRootPath,
-			Usage:   "gitea publish golang zip root path, default is parent for CI_WORKSPACE",
-			Hidden:  true,
-			EnvVars: []string{EnvGiteaPubGolangZipRootPath},
 		},
 	}
 }
@@ -120,12 +110,6 @@ func BindCliFlags(c *cli.Context,
 	stepsTransferPath string, stepsOutDisable bool,
 ) (*GiteaPublishGolang, error) {
 
-	zipRootPath := c.String(CliNameGiteaPubGolangZipRootPath)
-	if zipRootPath == "" {
-		zipRootPath = filepath.Dir(rootPath)
-	}
-
-	saveUploadResultRoot := filepath.Join(rootPath, c.String(CliNameGiteaPubGolangUpdateResultRootPath))
 	config := Settings{
 		Debug:             debug,
 		TimeoutSecond:     c.Uint(wd_flag.NameCliPluginTimeoutSecond),
@@ -141,10 +125,9 @@ func BindCliFlags(c *cli.Context,
 		GiteaTimeoutSecond: c.Uint(CliNameGiteaPubGolangTimeoutSecond),
 
 		PublishPackageGoPath: c.String(CliNameGiteaPubGolangPathGo),
-		ZipTargetRootPath:    zipRootPath,
 		PublishRemovePaths:   c.StringSlice(CliNameGiteaPubGolangRemovePaths),
 
-		ResultUploadRootPath: saveUploadResultRoot,
+		ResultUploadRootPath: c.String(CliNameGiteaPubGolangUpdateResultRootPath),
 		ResultUploadFileName: c.String(CliNameGiteaPubGolangUpdateResultFileName),
 	}
 

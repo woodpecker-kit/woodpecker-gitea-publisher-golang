@@ -26,6 +26,15 @@ Please read [Contributor Guide](.github/CONTRIBUTING_DOC/CONTRIBUTING.md) for mo
 
 ## Features
 
+- [x] push to [gitea Go Package Registry](https://docs.gitea.com/usage/packages/go/)
+- [x] use TempDir to generate go mod zip file
+- [x] support dry-run mode
+- [x] auto get gitea base URL by `CI_FORGE_URL`
+- [x] support [Monorepo](https://en.wikipedia.org/wiki/Monorepo)
+    - use `settings.gitea-publish-golang-path-go` to publish dir go.mod one by one
+- [x] out publish info json file default `dist/go-mod-upload.json`
+    - use `settings.gitea-publish-golang-update-result-root-path` to change out root path, default `dist`
+    - use `settings.gitea-publish-golang-update-result-file-name` to change out file name, default `go-mod-upload.json`
 - [ ] more perfect test case coverage
 - [ ] more perfect benchmark case
 

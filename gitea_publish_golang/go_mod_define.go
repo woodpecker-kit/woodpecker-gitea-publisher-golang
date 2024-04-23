@@ -8,7 +8,9 @@ type PublishPackageGoInfo struct {
 	ModVersion     module.Version `json:"-"`
 	Version        string
 	PackageName    string
-	UploadTimeUnix int64
+	GoModGoVersion string
+
 	HostName       string
 	PackagePageUrl string
+	UploadTimeUnix int64
 }
