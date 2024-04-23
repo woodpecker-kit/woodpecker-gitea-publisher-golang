@@ -65,9 +65,9 @@ steps:
     pull: false
     settings:
       # debug: true
+      # gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-api-key: # gitea api key, Required
         from_secret: gitea_api_key_release
-      gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-path-go: "" # publish go package is dir to find go.mod, will append project root path, default is this project root path
       gitea-publish-golang-remove-paths: # publish go package remove paths, this path under `gitea-publish-golang-path-go`, default will remove `dist`
         - "dist"
@@ -100,9 +100,9 @@ steps:
     image: woodpecker-gitea-publisher-golang
     settings:
       # debug: true
+      # gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-api-key: # gitea api key, Required
         from_secret: gitea_api_key_release
-      gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-path-go: "" # publish go package is dir to find go.mod, will append project root path, default is this project root path
       gitea-publish-golang-remove-paths: # publish go package remove paths, this path under `gitea-publish-golang-path-go`, default will remove `dist`
         - "dist"
@@ -121,12 +121,12 @@ steps:
     pull: false
     settings:
       debug: true
+      gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-timeout-second: 120 # gitea release api timeout second, default 60, less 30 
       gitea-publish-golang-api-key: # gitea api key, Required
         from_secret: gitea_api_key_release
       gitea-publish-golang-base-url: "https://gitea.example.com" # default by CI_FORGE_URL auto to find
       gitea-publish-golang-insecure: true #  gitea insecure enable
-      gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-path-go: "sub-go" # publish go package is dir to find go.mod, will append project root path, default is this project root path
       gitea-publish-golang-remove-paths: # publish go package remove paths, this path under `gitea-publish-golang-path-go`, default will remove `dist`
         - "dist"
