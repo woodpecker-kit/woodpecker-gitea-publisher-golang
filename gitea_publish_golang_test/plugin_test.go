@@ -11,7 +11,7 @@ import (
 )
 
 func TestCheckArgsPlugin(t *testing.T) {
-	t.Log("mock Plugin")
+	t.Log("mock GiteaPublishGolang")
 
 	testDataPathRoot, errTestDataPathRoot := testGoldenKit.GetOrCreateTestDataFullPath("args_plugin_test")
 	if errTestDataPathRoot != nil {
@@ -81,14 +81,14 @@ func TestCheckArgsPlugin(t *testing.T) {
 }
 
 func TestPlugin(t *testing.T) {
-	t.Log("do Plugin")
+	t.Log("do GiteaPublishGolang")
 	if envCheck(t) {
 		return
 	}
 	if envMustArgsCheck(t) {
 		return
 	}
-	t.Log("mock Plugin args")
+	t.Log("mock GiteaPublishGolang args")
 
 	testDataPathRoot, errTestDataPathRoot := testGoldenKit.GetOrCreateTestDataFullPath("plugin_test")
 	if errTestDataPathRoot != nil {

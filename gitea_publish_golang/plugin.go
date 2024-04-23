@@ -6,8 +6,8 @@ import (
 )
 
 type (
-	// Plugin gitea_publish_golang all config
-	Plugin struct {
+	// GiteaPublishGolang gitea_publish_golang all config
+	GiteaPublishGolang struct {
 		Name           string
 		Version        string
 		woodpeckerInfo *wd_info.WoodpeckerInfo
@@ -16,11 +16,11 @@ type (
 
 		Settings Settings
 
-		FuncPlugin FuncPlugin `json:"-"`
+		FuncPlugin FuncGiteaPublishGolang `json:"-"`
 	}
 )
 
-type FuncPlugin interface {
+type FuncGiteaPublishGolang interface {
 	ShortInfo() wd_short_info.WoodpeckerInfoShort
 
 	SetWoodpeckerInfo(info wd_info.WoodpeckerInfo)

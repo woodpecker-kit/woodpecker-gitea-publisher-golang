@@ -16,7 +16,7 @@ import (
 	"os/user"
 )
 
-var wdPlugin *gitea_publish_golang.Plugin
+var wdPlugin *gitea_publish_golang.GiteaPublishGolang
 
 // GlobalBeforeAction
 // do command Action before flag global.
