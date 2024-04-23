@@ -16,6 +16,15 @@ func (z *GoModZip) CreateGoModeZipPackageFile(targetPath string) error {
 		return fmt.Errorf("check error at CreateGoModeZipPackageFile versionName is empty")
 	}
 
+	writable, errDirWritable := isDirectoryWritable(targetPath)
+	if errDirWritable != nil {
+		return fmt.Errorf("check error at CreateGoModeZipPackageFile check targetPath %s writable: %v", targetPath, errDirWritable)
+	}
+	if !writable {
+		return fmt.Errorf("check error at CreateGoModeZipPackageFile targetPath not writable: %s", targetPath)
+
+	}
+
 	outPath := filepath.Join(targetPath, fmt.Sprintf("%s.zip", z.versionName))
 	outFile, err := os.Create(outPath)
 	if err != nil {
@@ -73,4 +82,35 @@ func (z *GoModZip) fetchGoModFile() error {
 	z.versionName = goModFile.Module.Mod.Version
 
 	return nil
+}
+
+// isDirectoryWritable checks if the given directory path is writable on the current platform.
+func isDirectoryWritable(dirPath string) (bool, error) {
+	info, err := os.Stat(dirPath)
+	if err != nil {
+		return false, fmt.Errorf("failed to get directory info: %w", err)
+	}
+
+	if !info.IsDir() {
+		return false, fmt.Errorf("%s is not a directory", dirPath)
+	}
+
+	// Attempt to open the directory for writing. This operation should fail if the directory is not writable.
+	// Use the O_RDONLY flag with O_CREATE to ensure that we're only checking permissions and not actually creating a file.
+	file, err := os.OpenFile(filepath.Join(dirPath, ".write_check"), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0666)
+	if err != nil {
+		if os.IsPermission(err) {
+			return false, nil // Directory is not writable due to permission issues
+		}
+		return false, fmt.Errorf("failed to check directory writability: %w", err)
+	}
+	defer file.Close() // Close the temporary file after the check
+
+	// If we reach here, the directory is writable, so remove the temporary file
+	err = os.Remove(file.Name())
+	if err != nil {
+		return false, fmt.Errorf("failed to remove temporary file: %w", err)
+	}
+
+	return true, nil
 }

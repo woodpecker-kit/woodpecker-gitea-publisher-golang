@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/sinlov-go/go-common-lib/pkg/filepath_plus"
+	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
 	"path/filepath"
 )
 
@@ -34,16 +35,24 @@ func (p *GiteaPublishGolang) publishByClient() error {
 	if errCreateGoModZip != nil {
 		return errCreateGoModZip
 	}
+	wd_log.Infof("create go mod zip to: %s", p.Settings.ZipTargetRootPath)
 
 	packageGoUpload, errPackageGoUpload := pc.PackageGoUpload()
 	if errPackageGoUpload != nil {
 		return errPackageGoUpload
 	}
+	if p.Settings.DryRun {
+		return nil
+	}
+
+	wd_log.DebugJsonf(packageGoUpload, "packageGoUpload res")
+
 	saveUploadFilePath := filepath.Join(p.Settings.ResultUploadRootPath, p.Settings.ResultUploadFileName)
 	errSaveResult := filepath_plus.WriteFileAsJsonBeauty(saveUploadFilePath, packageGoUpload, false)
 	if errSaveResult != nil {
 		return errSaveResult
 	}
+	wd_log.Infof("save upload result to: %s", saveUploadFilePath)
 
 	return nil
 }
