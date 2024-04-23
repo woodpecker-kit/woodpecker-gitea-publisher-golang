@@ -7,6 +7,8 @@ import (
 	"github.com/woodpecker-kit/woodpecker-tools/wd_info"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_log"
 	"github.com/woodpecker-kit/woodpecker-tools/wd_short_info"
+	"os"
+	"path/filepath"
 )
 
 func (p *GiteaPublishGolang) ShortInfo() wd_short_info.WoodpeckerInfoShort {
@@ -98,6 +100,21 @@ func (p *GiteaPublishGolang) checkArgs() error {
 	if p.Settings.GiteaApiKey == "" {
 		return fmt.Errorf("check args [ %s ] must set, now is empty", CliNameGiteaPublishGolangApiKey)
 	}
+
+	version := p.ShortInfo().Build.Tag
+	if version == "" {
+		version = "latest"
+	}
+
+	p.Settings.PublishPackageVersion = version
+
+	p.Settings.findOutGoModPath = filepath.Join(p.Settings.RootPath, p.Settings.PublishPackageGoPath)
+
+	tempDir := os.TempDir()
+	shortInfo := p.ShortInfo()
+	zipTempDir := filepath.Join(tempDir, "woodpecker-gitea-publisher-golang", shortInfo.Repo.Hostname, shortInfo.Repo.OwnerName, shortInfo.Repo.ShortName, shortInfo.Build.Number)
+	wd_log.Debugf("zip target root path: %s", zipTempDir)
+	p.Settings.ZipTargetRootPath = zipTempDir
 
 	return nil
 }

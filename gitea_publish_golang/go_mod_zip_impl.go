@@ -2,18 +2,27 @@ package gitea_publish_golang
 
 import (
 	"fmt"
+	"github.com/sinlov-go/go-common-lib/pkg/filepath_plus"
 	"golang.org/x/mod/modfile"
+	"golang.org/x/mod/module"
 	"golang.org/x/mod/zip"
 	"os"
 	"path/filepath"
 )
 
-func (z *GoModZip) CreateGoModeZipPackageFile(targetPath string) error {
+func (z *GoModZip) CreateGoModeZipPackageFile(targetPath string, version string) error {
 	if z.modFile == nil {
 		return fmt.Errorf("check error at CreateGoModeZipPackageFile modFile is nil")
 	}
-	if z.versionName == "" {
-		return fmt.Errorf("check error at CreateGoModeZipPackageFile versionName is empty")
+	if version == "" {
+		return fmt.Errorf("check error at CreateGoModeZipPackageFile version is empty")
+	}
+
+	if !filepath_plus.PathExistsFast(targetPath) {
+		errMakeZipRootPath := filepath_plus.Mkdir(targetPath)
+		if errMakeZipRootPath != nil {
+			return fmt.Errorf("check error at CreateGoModeZipPackageFile make zip root path: %s", errMakeZipRootPath)
+		}
 	}
 
 	writable, errDirWritable := isDirectoryWritable(targetPath)
@@ -25,15 +34,20 @@ func (z *GoModZip) CreateGoModeZipPackageFile(targetPath string) error {
 
 	}
 
-	outPath := filepath.Join(targetPath, fmt.Sprintf("%s.zip", z.versionName))
+	outPath := filepath.Join(targetPath, fmt.Sprintf("%s.zip", version))
 	outFile, err := os.Create(outPath)
 	if err != nil {
 		return fmt.Errorf("check error at CreateGoModeZipPackageFile create zip file: %s", err)
 	}
 
-	err = zip.CreateFromDir(outFile, z.modFile.Module.Mod, z.modRootPath)
+	modVersion := module.Version{
+		Path:    z.modFile.Module.Mod.Path,
+		Version: version,
+	}
+
+	err = zip.CreateFromDir(outFile, modVersion, z.modRootPath)
 	if err != nil {
-		return fmt.Errorf("check error at CreateGoModeZipPackageFile CreateFromDir err: %s", err)
+		return fmt.Errorf("CreateGoModeZipPackageFile zip.CreateFromDir err: %s", err)
 	}
 
 	z.zipPackageFilePath = outPath
@@ -58,6 +72,10 @@ func (z *GoModZip) GetVersionName() string {
 
 func (z *GoModZip) GetGoModPackageName() string {
 	return z.modFile.Module.Mod.Path
+}
+
+func (z *GoModZip) GetGoModeGoVersion() string {
+	return z.modFile.Go.Version
 }
 
 func (z *GoModZip) fetchGoModFile() error {

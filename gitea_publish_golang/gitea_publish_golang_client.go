@@ -34,7 +34,7 @@ type GiteaPublishGolangClient interface {
 
 	RemotePackageGoFetch(version string) (*GiteaPackageInfo, error)
 
-	CreateGoModZip(zipRootPath string, goModRootPath string, removePath []string) error
+	CreateGoModZip(version string, zipRootPath string, goModRootPath string, removePath []string) error
 
 	PackageGoUpload() (*PublishPackageGoInfo, error)
 }

@@ -18,10 +18,18 @@ type (
 		GiteaTimeoutSecond uint
 
 		PublishPackageGoPath string
-		ZipTargetRootPath    string
+		// findOutGoModPath is the path to find go.mod file will change by check args
+		findOutGoModPath     string
 		PublishRemovePaths   []string
 		ResultUploadRootPath string
 		ResultUploadFileName string
+
+		// PublishPackageVersion is the version to publish this by check args success will init by tag or latest
+		PublishPackageVersion string
+
+		// ZipTargetRootPath    is the root path of zip target with check args success will init by
+		// tempDir/woodpecker-gitea-publisher-golang/{repo-hostname}/{owner}/{repo}/{build_number}
+		ZipTargetRootPath string
 	}
 )
 

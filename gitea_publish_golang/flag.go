@@ -62,7 +62,7 @@ func GlobalFlag() []cli.Flag {
 		},
 		&cli.StringFlag{
 			Name:    CliNameGiteaPubGolangPathGo,
-			Usage:   "publish go package is dir to find go.mod, if not set will use git root path, gitea 1.20.1+ support",
+			Usage:   "publish go package is dir to find go.mod, will append project root path, default is this project root path",
 			EnvVars: []string{EnvGiteaPubGolangPathGo},
 		},
 		&cli.StringSliceFlag{
@@ -89,9 +89,6 @@ func GlobalFlag() []cli.Flag {
 const (
 	CliNameGiteaPubGolangTimeoutSecond = "settings.gitea-publish-golang-timeout-second"
 	EvnGiteaPubGolangTimeoutSecond     = "PLUGIN_GITEA_PUBLISH_GOLANG_TIMEOUT_SECOND"
-
-	CliNameGiteaPubGolangZipRootPath = "settings.gitea-publish-golang-zip-root-path"
-	EnvGiteaPubGolangZipRootPath     = "PLUGIN_GITEA_PUBLISH_GOLANG_ZIP_ROOT_PATH"
 )
 
 func HideGlobalFlag() []cli.Flag {
@@ -103,12 +100,6 @@ func HideGlobalFlag() []cli.Flag {
 			Hidden:  true,
 			EnvVars: []string{EvnGiteaPubGolangTimeoutSecond},
 		},
-		&cli.StringFlag{
-			Name:    CliNameGiteaPubGolangZipRootPath,
-			Usage:   "gitea publish golang zip root path, default is parent for CI_WORKSPACE",
-			Hidden:  true,
-			EnvVars: []string{EnvGiteaPubGolangZipRootPath},
-		},
 	}
 }
 
@@ -119,11 +110,6 @@ func BindCliFlags(c *cli.Context,
 	rootPath,
 	stepsTransferPath string, stepsOutDisable bool,
 ) (*GiteaPublishGolang, error) {
-
-	zipRootPath := c.String(CliNameGiteaPubGolangZipRootPath)
-	if zipRootPath == "" {
-		zipRootPath = filepath.Dir(rootPath)
-	}
 
 	saveUploadResultRoot := filepath.Join(rootPath, c.String(CliNameGiteaPubGolangUpdateResultRootPath))
 	config := Settings{
@@ -141,7 +127,6 @@ func BindCliFlags(c *cli.Context,
 		GiteaTimeoutSecond: c.Uint(CliNameGiteaPubGolangTimeoutSecond),
 
 		PublishPackageGoPath: c.String(CliNameGiteaPubGolangPathGo),
-		ZipTargetRootPath:    zipRootPath,
 		PublishRemovePaths:   c.StringSlice(CliNameGiteaPubGolangRemovePaths),
 
 		ResultUploadRootPath: saveUploadResultRoot,

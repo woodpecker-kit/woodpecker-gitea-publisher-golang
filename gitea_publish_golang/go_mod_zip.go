@@ -20,7 +20,9 @@ type GoModZipFunc interface {
 
 	GetGoModPackageName() string
 
-	CreateGoModeZipPackageFile(targetPath string) error
+	GetGoModeGoVersion() string
+
+	CreateGoModeZipPackageFile(targetPath string, version string) error
 
 	GetZipPackageFilePath() (string, error)
 }
