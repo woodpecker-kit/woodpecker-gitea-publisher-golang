@@ -40,21 +40,6 @@ Please read [Contributor Guide](.github/CONTRIBUTING_DOC/CONTRIBUTING.md) for mo
 
 ## usage
 
-- use this template, replace list below and add usage
-    - `github.com/woodpecker-kit/woodpecker-gitea-publisher-golang` to your package name
-    - `woodpecker-kit` to your owner name
-    - `woodpecker-gitea-publisher-golang` to your project name
-
-- use github action for this workflow push to docker hub, must add
-    - variables `ENV_DOCKERHUB_OWNER` user of docker hub
-    - variables `ENV_DOCKERHUB_REPO_NAME` repo name of docker hub
-    - secrets `DOCKERHUB_TOKEN` token of docker hub user from [hub.docker](https://hub.docker.com/settings/security)
-
-- check `docker-bake.hcl` config, change to your docker image
-
-- if you use `wd_steps_transfer` just add `.woodpecker_kit.steps.transfer` at git ignore
-- change code start with `// change or remove`
-
 ### workflow usage
 
 - see [doc](doc/docs.md)
