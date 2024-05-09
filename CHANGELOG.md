@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.0.2](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.0.1...v1.0.2) (2024-05-09)
+
+### 📝 Documentation
+
+* remove useless template doc ([753db63e](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/753db63e46c30d228b96eddd5c6e2f7416dd5f56))
+
+### 👷‍ Build System
+
+* update build docker bake pipline and add `auto-merge-dependabot` ([24450371](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/24450371d13fc1a118995b1710aa5e6426684246)), build [#8](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/issues/8)
+
 ## [1.0.1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.0.0...v1.0.1) (2024-05-09)
 
 ### 📝 Documentation
