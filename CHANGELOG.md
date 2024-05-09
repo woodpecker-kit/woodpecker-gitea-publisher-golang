@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.0.1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.0.0...v1.0.1) (2024-05-09)
+
+### 📝 Documentation
+
+* update doc of usage ([7e6954fc](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/7e6954fcfacffcabeaf26c2d9bca19b4f67b3c87))
+
+### 👷‍ Build System
+
+* bump golangci/golangci-lint-action from 4 to 5 ([e5a65a98](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/e5a65a98e6da61469a08aedc97d810ccf3118d7d))
+
+* bump convention-change/conventional-version-check ([b2215e57](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/b2215e578e6b072324e735e1f342c4f6684777c6))
+
+* bump github.com/urfave/cli/v2 from 2.27.1 to 2.27.2 ([b2c8b2d5](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/b2c8b2d54f0d5c2d442ff6063609b617db5ad28d))
+
 ## 1.0.0 (2024-04-24)
 
 ### ✨ Features
