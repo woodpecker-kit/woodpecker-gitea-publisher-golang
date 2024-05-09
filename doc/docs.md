@@ -1,10 +1,10 @@
 ---
 name: woodpecker-gitea-publisher-golang
-description: woodpecker gitea_publish_golang template
-author: woodpecker-kit
-tags: [ environment, woodpecker-gitea-publisher-golang ]
-containerImage: woodpecker-kit/woodpecker-gitea-publisher-golang
-containerImageUrl: https://hub.docker.com/r/woodpecker-kit/woodpecker-gitea-publisher-golang
+description: Plugin to publish golang package to a Gitea Go Package Registry
+author: sinlov
+tags: [ Gitea, publish-golang ]
+containerImage: sinlov/woodpecker-gitea-publisher-golang
+containerImageUrl: https://hub.docker.com/r/sinlov/woodpecker-gitea-publisher-golang
 url: https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang
 icon: https://raw.githubusercontent.com/woodpecker-kit/woodpecker-gitea-publisher-golang/main/doc/logo.svg
 ---
