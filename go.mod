@@ -8,7 +8,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/sinlov-go/gitea-client-wrapper v1.1.0
 	github.com/sinlov-go/go-common-lib v1.7.0
-	github.com/sinlov-go/unittest-kit v1.1.0
+	github.com/sinlov-go/unittest-kit v1.1.1
 	github.com/stretchr/testify v1.9.0
 	github.com/urfave/cli/v2 v2.27.4
 	github.com/woodpecker-kit/woodpecker-tools v1.20.0

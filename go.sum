@@ -26,8 +26,8 @@ github.com/sinlov-go/gitea-client-wrapper v1.1.0 h1:TqXlk91g8QBJRlOCYKfx4+0y750z
 github.com/sinlov-go/gitea-client-wrapper v1.1.0/go.mod h1:pPD3fkxMQAsLASFRBp2HJfL3V0+3X9sJUPH+hddSESM=
 github.com/sinlov-go/go-common-lib v1.7.0 h1:1/zLoIPYRw26haBGU3kw0o8vmSw3bfqQMuK9TtizMn4=
 github.com/sinlov-go/go-common-lib v1.7.0/go.mod h1:B8iZES6+7p3uldjyF6zGv7BG8r0iPgndALZRmiSqkDQ=
-github.com/sinlov-go/unittest-kit v1.1.0 h1:mT3cnhe+LAlvOoxkAggi4xQDOT58Q3az4XKV3R5cdJM=
-github.com/sinlov-go/unittest-kit v1.1.0/go.mod h1:2Xkvyl6VpSXAZ6lyrb4q52Dk4oAD+Yio5KQsd1ZhxOc=
+github.com/sinlov-go/unittest-kit v1.1.1 h1:Xuml8PGkxdwzRQxlO37q/zvE9fHHQlIDM0KZXhE77Oc=
+github.com/sinlov-go/unittest-kit v1.1.1/go.mod h1:u/+OWj6Wm1mnfMRS8FhWjrg5aZ0yqAQM6y0wcHt/o3s=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
 github.com/stretchr/testify v1.9.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/urfave/cli/v2 v2.27.4 h1:o1owoI+02Eb+K107p27wEX9Bb8eqIoZCfLXloLUSWJ8=
