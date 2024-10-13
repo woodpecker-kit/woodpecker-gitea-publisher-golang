@@ -10,7 +10,7 @@ require (
 	github.com/sinlov-go/go-common-lib v1.7.1
 	github.com/sinlov-go/unittest-kit v1.2.1
 	github.com/stretchr/testify v1.9.0
-	github.com/urfave/cli/v2 v2.27.4
+	github.com/urfave/cli/v2 v2.27.5
 	github.com/woodpecker-kit/woodpecker-tools v1.20.0
 	golang.org/x/mod v0.20.0
 )
@@ -18,7 +18,7 @@ require (
 require (
 	code.gitea.io/sdk/gitea v0.18.0 // indirect
 	github.com/chainguard-dev/git-urls v1.0.2 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/davidmz/go-pageant v1.0.2 // indirect
 	github.com/go-fed/httpsig v1.1.0 // indirect
