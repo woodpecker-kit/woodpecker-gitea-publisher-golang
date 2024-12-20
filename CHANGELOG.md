@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.1.0](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.0.2...v1.1.0) (2024-12-20)
+
+### 👷‍ Build System
+
+* update Go toolchain to 1.22.10 ([fe03bb38](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/fe03bb38682f28690d78e13dde4fbc8afa6b2f15)), re [#28](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/issues/28)
+
+* bump golang.org/x/crypto from 0.22.0 to 0.31.0 ([e65790e4](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/e65790e48a8606718113f9dd2fe3a816efe64e77))
+
+* bump github.com/sinlov-go/gitea-client-wrapper ([5a7335c3](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/5a7335c3a8c15a86602cc61e9cf54205cfcf1235))
+
+* bump github.com/stretchr/testify from 1.9.0 to 1.10.0 ([d84f28d3](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/d84f28d366361e728627201e3179372161c014a4))
+
+* bump github.com/Masterminds/semver/v3 from 3.3.0 to 3.3.1 ([54eef787](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/54eef787d514fe43fb52507f6d049ec95e3c0e1d))
+
+* bump golang.org/x/mod from 0.20.0 to 0.22.0 ([61c874cf](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/61c874cf1af61c4e8235865c9646ab03e02abb18))
+
+* bump github.com/urfave/cli/v2 from 2.27.4 to 2.27.5 ([7d18190c](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/7d18190c3f69aa409e184a3bafe065fd55f65ffa))
+
+* bump github.com/sinlov-go/unittest-kit from 1.1.1 to 1.2.1 ([673b4f79](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/673b4f7984a27d4c4d0bff6ed94229afb9ed0e13))
+
+* bump github.com/sinlov-go/go-common-lib from 1.7.0 to 1.7.1 ([126f48a5](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/126f48a5111df602b8dbc0ca4ec86f591e85c1a5))
+
+* bump github.com/Masterminds/semver/v3 from 3.2.1 to 3.3.0 ([90b754df](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/90b754df845139ac96d200fef95890f08b599eca))
+
+* bump github.com/sinlov-go/unittest-kit from 1.1.0 to 1.1.1 ([431f24a8](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/431f24a81530a43a262a231d80bb149a29c7d07a))
+
+* bump github.com/urfave/cli/v2 from 2.27.3 to 2.27.4 ([f48d3bec](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/f48d3bec9ed5c345d73e5b3c0a2bdc1f3dae6ee0))
+
+* bump golang.org/x/mod from 0.19.0 to 0.20.0 ([12066e69](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/12066e6948427973748c2216269103df5dff23bd))
+
+* bump github.com/urfave/cli/v2 from 2.27.2 to 2.27.3 ([d3990e13](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/d3990e13de4cde478096af5e92f4ea3d326caff9))
+
+* bump golang.org/x/mod from 0.18.0 to 0.19.0 ([10dc9fe6](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/10dc9fe6e5dde5738eeb7f7bb5e0ea22dcc3d1f4))
+
+* bump docker/bake-action from 4 to 5 ([79e92dfe](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/79e92dfe8ae3c6835582dc9165e826e3d9de2aba))
+
+* bump golang.org/x/mod from 0.17.0 to 0.18.0 ([dbce18f8](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/dbce18f81f496e177ba395024a4235fd59dcaa3d))
+
+* bump golangci/golangci-lint-action from 5 to 6 ([ae091cd1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/ae091cd172f42fec0f67a71e45c2800ca451aebb))
+
 ## [1.0.2](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.0.1...v1.0.2) (2024-05-09)
 
 ### 📝 Documentation
