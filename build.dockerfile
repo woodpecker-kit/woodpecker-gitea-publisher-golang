@@ -3,7 +3,7 @@
 # Author: woodpecker-kit
 # dockerfile offical document https://docs.docker.com/engine/reference/builder/
 # https://hub.docker.com/_/golang
-FROM golang:1.19.13 as builder
+FROM golang:1.22.10 as builder
 
 ARG GO_ENV_PACKAGE_NAME=github.com/woodpecker-kit/woodpecker-gitea-publisher-golang
 ARG GO_ENV_ROOT_BUILD_BIN_NAME=woodpecker-gitea-publisher-golang

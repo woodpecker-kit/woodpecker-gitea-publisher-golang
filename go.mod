@@ -1,6 +1,8 @@
 module github.com/woodpecker-kit/woodpecker-gitea-publisher-golang
 
-go 1.19
+go 1.22.0
+
+toolchain go1.22.10
 
 require (
 	github.com/Masterminds/semver/v3 v3.3.1
