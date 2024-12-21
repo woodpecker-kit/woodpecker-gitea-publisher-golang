@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.1.2](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.1.1...v1.1.2) (2024-12-21)
+
+### 👷‍ Build System
+
+* bump github.com/woodpecker-kit/woodpecker-tools ([55ce4792](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/55ce479269f69a1681772e65be45e348bf9dd504))
+
+* bump github.com/sinlov-go/gitea-client-wrapper ([11370320](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/113703206fed290aa611279b072174cebdf83eb1))
+
 ## [1.1.1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.1.0...v1.1.1) (2024-12-21)
 
 ### 👷‍ Build System
