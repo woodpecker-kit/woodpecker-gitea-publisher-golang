@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.1.1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.1.0...v1.1.1) (2024-12-21)
+
+### 👷‍ Build System
+
+* update GitHub release action to v2 ([698ae7c3](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/698ae7c305f9908379212c0c46fbbd2a6ae04259))
+
 ## [1.1.0](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.0.2...v1.1.0) (2024-12-20)
 
 ### 👷‍ Build System
