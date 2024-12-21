@@ -8,7 +8,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.3.1
 	github.com/gookit/color v1.5.4
 	github.com/joho/godotenv v1.5.1
-	github.com/sinlov-go/gitea-client-wrapper v1.3.0
+	github.com/sinlov-go/gitea-client-wrapper v1.4.0
 	github.com/sinlov-go/go-common-lib v1.7.1
 	github.com/sinlov-go/unittest-kit v1.2.1
 	github.com/stretchr/testify v1.10.0
@@ -24,7 +24,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/davidmz/go-pageant v1.0.2 // indirect
 	github.com/go-fed/httpsig v1.1.0 // indirect
-	github.com/hashicorp/go-version v1.6.0 // indirect
+	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
