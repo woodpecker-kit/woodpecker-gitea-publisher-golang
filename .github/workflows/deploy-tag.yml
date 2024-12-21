@@ -60,7 +60,7 @@ jobs:
         run: |
           ls -R ${{ github.workspace }}/dist
 
-      - uses: softprops/action-gh-release@master
+      - uses: softprops/action-gh-release@v2
         name: Create Release
         if: ${{ ! inputs.dry_run }}
         with:
