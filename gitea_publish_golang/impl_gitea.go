@@ -19,10 +19,47 @@ func (p *GiteaPublishGolang) publishByClient() error {
 		return errLocalPackageGoFetch
 	}
 
-	_, errRemotePackageGoFetch := pc.RemotePackageGoFetch(p.Settings.PublishPackageVersion)
+	remotePackageGoRes, errRemotePackageGoFetch := pc.RemotePackageGoFetch(p.Settings.PublishPackageVersion)
 	if errRemotePackageGoFetch != nil {
 		if !errors.Is(errRemotePackageGoFetch, ErrPackageNotExist) {
 			return fmt.Errorf(" RemotePackageGoFetch error: %s", errRemotePackageGoFetch)
+		}
+	}
+	if remotePackageGoRes != nil { // get package info by release
+		if p.Settings.GiteaReleaseExistDo == GiteaReleaseExistsDoFail {
+			errExistInfo := fmt.Sprintf("remote exist package go at [ %s ] name [ %s ], version: %s",
+				p.ShortInfo().Repo.OwnerName,
+				remotePackageGoRes.Name,
+				p.Settings.PublishPackageVersion)
+			wd_log.Warnf("will fail at publish, %s", errExistInfo)
+			return fmt.Errorf("publish golang package exist for config %s, err: %v",
+				p.Settings.GiteaReleaseExistDo,
+				errExistInfo,
+			)
+		}
+		if p.Settings.GiteaReleaseExistDo == GiteaReleaseExistsDoSkip {
+			wd_log.Infof("remote exist package go at [ %s ] name [ %s ], version: %s, skip create release",
+				p.ShortInfo().Repo.OwnerName,
+				remotePackageGoRes.Name,
+				p.Settings.PublishPackageVersion)
+			return nil
+		}
+		if p.Settings.GiteaReleaseExistDo == GiteaReleaseExistsDoOverwrite {
+			wd_log.Infof("remote exist package go at [ %s ] name [ %s ], version: %s, want overwrite",
+				p.ShortInfo().Repo.OwnerName,
+				remotePackageGoRes.Name,
+				p.Settings.PublishPackageVersion)
+			// do delete release
+			errDeletePackageGoFetch := pc.DeletePackageGoFetch(p.Settings.PublishPackageVersion)
+			if errDeletePackageGoFetch != nil {
+				wd_log.Warnf("delete package err: %v", errDeletePackageGoFetch)
+			} else {
+				wd_log.Infof("delete package success at [ %s ] name [ %s ], version: %s",
+					p.ShortInfo().Repo.OwnerName,
+					remotePackageGoRes.Name,
+					p.Settings.PublishPackageVersion,
+				)
+			}
 		}
 	}
 

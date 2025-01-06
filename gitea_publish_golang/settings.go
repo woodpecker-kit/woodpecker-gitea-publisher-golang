@@ -2,6 +2,12 @@ package gitea_publish_golang
 
 import "github.com/woodpecker-kit/woodpecker-tools/wd_info"
 
+const (
+	GiteaReleaseExistsDoFail      = "fail"
+	GiteaReleaseExistsDoSkip      = "skip"
+	GiteaReleaseExistsDoOverwrite = "overwrite"
+)
+
 type (
 	// Settings gitea_publish_golang private config
 	Settings struct {
@@ -19,8 +25,13 @@ type (
 
 		PublishPackageGoPath string
 		// findOutGoModPath is the path to find go.mod file will change by check args
-		findOutGoModPath     string
-		PublishRemovePaths   []string
+		findOutGoModPath   string
+		PublishRemovePaths []string
+
+		// GiteaReleaseExistDo is the action to do when gitea release exist.
+		// support value is GiteaReleaseExistsDoFail, GiteaReleaseExistsDoSkip, GiteaReleaseExistsDoOverwrite
+		GiteaReleaseExistDo string
+
 		ResultUploadRootPath string
 		// resultRootFullPath is the root path of result with check args success
 		resultRootFullPath   string
@@ -36,6 +47,12 @@ type (
 )
 
 var (
+	giteaReleaseExistDoSupport = []string{
+		GiteaReleaseExistsDoFail,
+		GiteaReleaseExistsDoSkip,
+		GiteaReleaseExistsDoOverwrite,
+	}
+
 	// pluginBuildStateSupport
 	pluginBuildStateSupport = []string{
 		wd_info.BuildStatusCreated,

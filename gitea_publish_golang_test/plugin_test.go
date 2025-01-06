@@ -92,12 +92,14 @@ func TestPlugin(t *testing.T) {
 	t.Log("mock GiteaPublishGolang args")
 
 	testDataFolderFullPath := testGoldenKit.GetTestDataFolderFullPath()
-	projectRootPath := filepath.Dir(filepath.Dir(testDataFolderFullPath))
+	if varProjectRootPath == "" {
+		varProjectRootPath = filepath.Dir(filepath.Dir(testDataFolderFullPath))
+	}
 
 	// tagPipeline
 	tagPipelineWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
-		wd_mock.FastWorkSpace(projectRootPath),
-		wd_mock.FastTag("v1.0.0", "new tag"),
+		wd_mock.FastWorkSpace(varProjectRootPath),
+		wd_mock.FastTag("v1.0.4", "new tag"),
 		wd_mock.WithCiForgeInfo(
 			wd_mock.WithCiForgeType(valCiForgeType),
 			wd_mock.WithCiForgeUrl(valCiForgeUrl),
@@ -113,10 +115,11 @@ func TestPlugin(t *testing.T) {
 		),
 	)
 	tagPipelineSettings := mockPluginSettings()
+	tagPipelineSettings.GiteaReleaseExistDo = gitea_publish_golang.GiteaReleaseExistsDoSkip
 
 	// pullRequestPipeline
 	pullRequestPipelineWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
-		wd_mock.FastWorkSpace(projectRootPath),
+		wd_mock.FastWorkSpace(varProjectRootPath),
 		wd_mock.FastPullRequest("1", "new pr", "feature-support", "main", "main"),
 		wd_mock.WithCiForgeInfo(
 			wd_mock.WithCiForgeType(valCiForgeType),

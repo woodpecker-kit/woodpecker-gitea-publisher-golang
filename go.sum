@@ -22,8 +22,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/russross/blackfriday/v2 v2.1.0 h1:JIOH55/0cWyOuilr9/qlrm0BSXldqnqwMsf35Ld67mk=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
-github.com/sinlov-go/gitea-client-wrapper v1.4.0 h1:6BXCkUnoPFfqhBrSxuJ1AgVtLVJEgUfW+HDD6Fresfw=
-github.com/sinlov-go/gitea-client-wrapper v1.4.0/go.mod h1:YdCgDtYoa+iCTpJB97iQBMu8uVm5/MUVTSd+XLtVi9U=
+github.com/sinlov-go/gitea-client-wrapper v1.4.1 h1:/6IUc3t9mF7FieovB2QTJ7nBVrgEPWXieQ0a4OcDRHA=
+github.com/sinlov-go/gitea-client-wrapper v1.4.1/go.mod h1:YdCgDtYoa+iCTpJB97iQBMu8uVm5/MUVTSd+XLtVi9U=
 github.com/sinlov-go/go-common-lib v1.7.1 h1:slVwwM/TiA7wzYYqRYMOHCOPmRLQn3NTU652fT2QWIE=
 github.com/sinlov-go/go-common-lib v1.7.1/go.mod h1:e+kY8eyLMnvayGezaWi3nU1VF5xsnMQ+DQUVdUC6Xbw=
 github.com/sinlov-go/unittest-kit v1.2.1 h1:iI8jKiJOuyrPXTZuQHRwUzuuiqE5EUdS3brziFTkb3Y=

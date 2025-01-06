@@ -35,6 +35,8 @@ Please read [Contributor Guide](.github/CONTRIBUTING_DOC/CONTRIBUTING.md) for mo
 - [x] out publish info json file default `dist/go-mod-upload.json`
     - use `settings.gitea-publish-golang-update-result-root-path` to change out root path, default `dist`
     - use `settings.gitea-publish-golang-update-result-file-name` to change out file name, default `go-mod-upload.json`
+- [x] args `gitea-release-exists-do`
+    - package release exists do, support `[fail skip overwrite]` ,{version 1.2+} (default: "fail")
 - [ ] more perfect test case coverage
 - [ ] more perfect benchmark case
 

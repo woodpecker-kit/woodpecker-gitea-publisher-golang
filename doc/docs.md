@@ -34,7 +34,8 @@ plugin as https://woodpecker-ci.org/ for https://docs.gitea.com/usage/packages/g
 | `gitea-publish-golang-base-url`                | **no**   |                      | gitea base url, default by `CI_FORGE_URL`                                                                   |
 | `gitea-publish-golang-insecure`                | **no**   | *false*              | gitea insecure enable                                                                                       |
 | `gitea-publish-golang-dry-run`                 | **no**   | *false*              | dry run mode                                                                                                |
-| `gitea-publish-golang-path-go`                 | **no**   |                      | publish go package is dir to find go.mod, will append project root path, default is this project root path  |
+| `gitea-release-exists-do`                      | **no**   | *fail*               | package release exists do, support `[fail skip overwrite]` ,{version 1.2+} (default: "fail")                |
+| `gitea-publish-golang-path-go`                 | **no**   | ""                   | publish go package is dir to find go.mod, will append project root path, default is this project root path  |
 | `gitea-publish-golang-remove-paths`            | **no**   | `["dist"]`           | publish go package remove paths, this path under `gitea-publish-golang-path-go`, default will remove `dist` |
 | `gitea-publish-golang-update-result-root-path` | **no**   | *dist*               | out result root path append CI Workspace, default `dist`                                                    |
 | `gitea-publish-golang-update-result-file-name` | **no**   | *go-mod-upload.json* | out file name, default `go-mod-upload.json`                                                                 |
@@ -68,6 +69,7 @@ steps:
       # gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-api-key: # gitea api key, Required
         from_secret: gitea_api_key_release
+      gitea-release-exists-do: "fail" # support [fail skip overwrite] (default: "fail") {version 1.2+}
       gitea-publish-golang-path-go: "" # publish go package is dir to find go.mod, will append project root path, default is this project root path
       gitea-publish-golang-remove-paths: # publish go package remove paths, this path under `gitea-publish-golang-path-go`, default will remove `dist`
         - "dist"
@@ -103,6 +105,7 @@ steps:
       # gitea-publish-golang-dry-run: true # dry run mode
       gitea-publish-golang-api-key: # gitea api key, Required
         from_secret: gitea_api_key_release
+      gitea-release-exists-do: "fail" # support [fail skip overwrite] (default: "fail") {version 1.2+}
       gitea-publish-golang-path-go: "" # publish go package is dir to find go.mod, will append project root path, default is this project root path
       gitea-publish-golang-remove-paths: # publish go package remove paths, this path under `gitea-publish-golang-path-go`, default will remove `dist`
         - "dist"
@@ -127,6 +130,7 @@ steps:
         from_secret: gitea_api_key_release
       gitea-publish-golang-base-url: "https://gitea.example.com" # default by CI_FORGE_URL auto to find
       gitea-publish-golang-insecure: true #  gitea insecure enable
+      gitea-release-exists-do: "fail" # support [fail skip overwrite] (default: "fail") {version 1.2+}
       gitea-publish-golang-path-go: "sub-go" # publish go package is dir to find go.mod, will append project root path, default is this project root path
       gitea-publish-golang-remove-paths: # publish go package remove paths, this path under `gitea-publish-golang-path-go`, default will remove `dist`
         - "dist"
@@ -141,6 +145,8 @@ steps:
 
 ## Known limitations
 
-1. go mod zip file generate by `zip.CreateFromDir`, this method will check as [https://semver.org/](https://semver.org/), so this kit use `CI_COMMIT_TAG` to generate version
+1. go mod zip file generate by `zip.CreateFromDir`, this method will check
+   as [https://semver.org/](https://semver.org/), so this kit use `CI_COMMIT_TAG` to generate version
 2. open `gitea-publish-golang-dry-run` mode can pass all check, but not publish to gitea
-3. but without event tag will use version mark as `latest`, this will not pass `zip.CreateFromDir`check, so will not publish to gitea
+3. but without event tag will use version mark as `latest`, this will not pass `zip.CreateFromDir`check, so will not
+   publish to gitea

@@ -5,10 +5,11 @@ go 1.22.0
 toolchain go1.22.10
 
 require (
+	code.gitea.io/sdk/gitea v0.19.0
 	github.com/Masterminds/semver/v3 v3.3.1
 	github.com/gookit/color v1.5.4
 	github.com/joho/godotenv v1.5.1
-	github.com/sinlov-go/gitea-client-wrapper v1.4.0
+	github.com/sinlov-go/gitea-client-wrapper v1.4.1
 	github.com/sinlov-go/go-common-lib v1.7.1
 	github.com/sinlov-go/unittest-kit v1.2.1
 	github.com/stretchr/testify v1.10.0
@@ -18,7 +19,6 @@ require (
 )
 
 require (
-	code.gitea.io/sdk/gitea v0.19.0 // indirect
 	github.com/chainguard-dev/git-urls v1.0.2 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect

@@ -86,6 +86,11 @@ func (p *GiteaPublishGolang) checkArgs() error {
 		return errCheck
 	}
 
+	errCheckGiteaReleaseSupport := argCheckInArr(CliNameGiteaReleaseExistsDo, p.Settings.GiteaReleaseExistDo, giteaReleaseExistDoSupport)
+	if errCheckGiteaReleaseSupport != nil {
+		return errCheckGiteaReleaseSupport
+	}
+
 	if p.Settings.GiteaBaseUrl == "" {
 		if p.woodpeckerInfo.CiForgeInfo.CiForgeType == "gitea" {
 			wd_log.Debugf("when CiForgeType [ gitea ] woodpeckerInfo.CiForgeInfo.CiForgeUrl [ %s ] as GiteaBaseUrl", p.woodpeckerInfo.CiForgeInfo.CiForgeUrl)
