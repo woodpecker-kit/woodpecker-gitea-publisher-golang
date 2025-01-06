@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.2.0](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.1.2...v1.2.0) (2025-01-06)
+
+### ✨ Features
+
+* add option `gitea-release-exists-do` at handle existing releases ([057e5b1a](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/057e5b1a8800d2bd8c47a50e77cbebcba260a74e)), fe [#32](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/issues/32)
+
 ## [1.1.2](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.1.1...v1.1.2) (2024-12-21)
 
 ### 👷‍ Build System
