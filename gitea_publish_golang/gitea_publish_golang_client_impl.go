@@ -60,6 +60,36 @@ func (p *publishGolangClient) RemotePackageGoFetch(version string) (*GiteaPackag
 	return &giteaPackage, nil
 }
 
+func (p *publishGolangClient) DeletePackageGoFetch(version string) error {
+	if p.goModZip == nil {
+		return fmt.Errorf("DeletePackageGoFetch go.mod not loaded by LocalPackageGoFetch")
+	}
+	pkgName := p.goModZip.GetGoModPackageName()
+	errEsCapePkgName := escapeValidatePathSegments(&pkgName)
+	if errEsCapePkgName != nil {
+		return fmt.Errorf("DeletePackageGoFetch escapeValidatePathSegments error: %s", errEsCapePkgName)
+	}
+	pkgVersion := version
+	errEsCapePkgNamePackageVersion := escapeValidatePathSegments(&pkgVersion)
+	if errEsCapePkgNamePackageVersion != nil {
+		return fmt.Errorf("DeletePackageGoFetch escapeValidatePathSegments error: %s", errEsCapePkgNamePackageVersion)
+	}
+	apiPath := fmt.Sprintf("/api/v1/packages/%s/%s/%s/%s", p.owner, "go", pkgName, pkgVersion)
+
+	wd_log.Debugf("try DeletePackageGoFetch apiPath: %s", apiPath)
+	resp, errApi := p.ApiGiteaDelete(apiPath, nil, nil)
+	if errApi != nil {
+		if resp != nil && resp.StatusCode == http.StatusNotFound {
+			return ErrPackageNotExist
+		}
+		return fmt.Errorf("DeletePackageGoFetch apiPath: %s, err: %v", apiPath, errApi)
+	}
+	if resp.StatusCode != http.StatusNoContent {
+		return nil
+	}
+	return nil
+}
+
 func (p *publishGolangClient) CreateGoModZip(version string, zipRootPath string, goModRootPath string, removePath []string) error {
 	if p.goModZip == nil {
 		return fmt.Errorf("CreateGoModZip go.mod not loaded by LocalPackageGoFetch")

@@ -28,6 +28,9 @@ const (
 	CliNameGiteaPubGolangRemovePaths = "settings.gitea-publish-golang-remove-paths"
 	EnvGiteaPubGolangRemovePaths     = "PLUGIN_GITEA_PUBLISH_GOLANG_REMOVE_PATHS"
 
+	CliNameGiteaReleaseExistsDo = "settings.gitea-release-exists-do"
+	EnvGiteaReleaseExistsDo     = "PLUGIN_GITEA_RELEASE_EXISTS_DO"
+
 	CliNameGiteaPubGolangUpdateResultRootPath = "settings.gitea-publish-golang-update-result-root-path"
 	EnvGiteaPubGolangUpdateResultRootPath     = "PLUGIN_GITEA_PUBLISH_GOLANG_UPDATE_RESULT_ROOT_PATH"
 
@@ -70,6 +73,13 @@ func GlobalFlag() []cli.Flag {
 			Value:   cli.NewStringSlice("dist"),
 			EnvVars: []string{EnvGiteaPubGolangRemovePaths},
 		},
+		&cli.StringFlag{
+			Name:    CliNameGiteaReleaseExistsDo,
+			Usage:   fmt.Sprintf("package release exists do, support %v ,{version 1.2+}", giteaReleaseExistDoSupport),
+			Value:   GiteaReleaseExistsDoFail,
+			EnvVars: []string{EnvGiteaReleaseExistsDo},
+		},
+
 		&cli.StringFlag{
 			Name:    CliNameGiteaPubGolangUpdateResultRootPath,
 			Usage:   "out result root path append CI Workspace, default `dist`",
@@ -126,6 +136,8 @@ func BindCliFlags(c *cli.Context,
 
 		PublishPackageGoPath: c.String(CliNameGiteaPubGolangPathGo),
 		PublishRemovePaths:   c.StringSlice(CliNameGiteaPubGolangRemovePaths),
+
+		GiteaReleaseExistDo: c.String(CliNameGiteaReleaseExistsDo),
 
 		ResultUploadRootPath: c.String(CliNameGiteaPubGolangUpdateResultRootPath),
 		ResultUploadFileName: c.String(CliNameGiteaPubGolangUpdateResultFileName),

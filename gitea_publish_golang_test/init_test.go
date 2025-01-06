@@ -21,6 +21,8 @@ const (
 	keyEnvCiKey  = "CI_KEY"
 	keyEnvCiKeys = "CI_KEYS"
 
+	envKeyProjectRootPath = "CI_PROJECT_ROOT_PATH"
+
 	mockVersion = "v1.0.0"
 	mockName    = "woodpecker-gitea-publisher-golang"
 )
@@ -49,6 +51,7 @@ var (
 	valEnvGiteaPubGolangInsecure    = false
 	valEnvGiteaPubGolangDryRun      = true
 	valEnvGiteaPubGolangPathGo      = ""
+	valGiteaReleaseExistDo          = ""
 	valEnvGiteaPubGolangRemovePaths = []string{
 		"dist",
 	}
@@ -56,12 +59,13 @@ var (
 
 	// CI Test Env
 
-	valCiRepoName   = ""
-	valCiRepoOwner  = ""
-	valCiSystemHost = ""
-	valCiSystemUrl  = ""
-	valCiForgeType  = "gitea"
-	valCiForgeUrl   = ""
+	varProjectRootPath = "" // change by env:CI_PROJECT_ROOT_PATH
+	valCiRepoName      = ""
+	valCiRepoOwner     = ""
+	valCiSystemHost    = ""
+	valCiSystemUrl     = ""
+	valCiForgeType     = "gitea"
+	valCiForgeUrl      = ""
 )
 
 func init() {
@@ -72,6 +76,7 @@ func init() {
 
 	testGoldenKit = unittest_file_kit.NewTestGoldenKit(testBaseFolderPath)
 
+	varProjectRootPath = env_kit.FetchOsEnvStr(envKeyProjectRootPath, "")
 	valCiRepoName = env_kit.FetchOsEnvStr(wd_flag.EnvKeyRepositoryCiName, "")
 	valCiRepoOwner = env_kit.FetchOsEnvStr(wd_flag.EnvKeyRepositoryCiOwner, "")
 	valCiSystemHost = env_kit.FetchOsEnvStr(wd_flag.EnvKeyCiSystemHost, "")
@@ -87,6 +92,7 @@ func init() {
 	valEnvGiteaPubGolangInsecure = env_kit.FetchOsEnvBool(gitea_publish_golang.EnvGiteaPubGolangInsecure, false)
 	valEnvGiteaPubGolangDryRun = env_kit.FetchOsEnvBool(gitea_publish_golang.EnvGiteaPubGolangDryRun, true)
 	valEnvGiteaPubGolangPathGo = env_kit.FetchOsEnvStr(gitea_publish_golang.EnvGiteaPubGolangPathGo, "")
+	valGiteaReleaseExistDo = env_kit.FetchOsEnvStr(gitea_publish_golang.EnvGiteaReleaseExistsDo, gitea_publish_golang.GiteaReleaseExistsDoFail)
 	removePathsEnv := env_kit.FetchOsEnvStringSlice(gitea_publish_golang.EnvGiteaPubGolangRemovePaths)
 	if len(removePathsEnv) > 0 {
 		valEnvGiteaPubGolangRemovePaths = removePathsEnv
@@ -154,6 +160,7 @@ func mockPluginSettings() gitea_publish_golang.Settings {
 	settings.GiteaInsecure = valEnvGiteaPubGolangInsecure
 	settings.PublishPackageGoPath = valEnvGiteaPubGolangPathGo
 	settings.PublishRemovePaths = valEnvGiteaPubGolangRemovePaths
+	settings.GiteaReleaseExistDo = valGiteaReleaseExistDo
 
 	return settings
 
