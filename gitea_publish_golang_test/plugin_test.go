@@ -115,7 +115,7 @@ func TestPlugin(t *testing.T) {
 		),
 	)
 	tagPipelineSettings := mockPluginSettings()
-	tagPipelineSettings.GiteaReleaseExistDo = gitea_publish_golang.GiteaReleaseExistsDoOverwrite
+	tagPipelineSettings.GiteaReleaseExistDo = gitea_publish_golang.GiteaReleaseExistsDoSkip
 
 	// pullRequestPipeline
 	pullRequestPipelineWoodpeckerInfo := *wd_mock.NewWoodpeckerInfo(
