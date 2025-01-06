@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.2.1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.2.0...v1.2.1) (2025-01-06)
+
+### 👷‍ Build System
+
+* add docker build timeout configuration ([35ec33c0](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/35ec33c06c1b19343b66106af56cf5dcd752a1ce))
+
 ## [1.2.0](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.1.2...v1.2.0) (2025-01-06)
 
 ### ✨ Features
