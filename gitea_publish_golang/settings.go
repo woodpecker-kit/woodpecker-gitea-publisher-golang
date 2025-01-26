@@ -1,7 +1,5 @@
 package gitea_publish_golang
 
-import "github.com/woodpecker-kit/woodpecker-tools/wd_info"
-
 const (
 	GiteaReleaseExistsDoFail      = "fail"
 	GiteaReleaseExistsDoSkip      = "skip"
@@ -53,13 +51,13 @@ var (
 		GiteaReleaseExistsDoOverwrite,
 	}
 
-	// pluginBuildStateSupport
-	pluginBuildStateSupport = []string{
-		wd_info.BuildStatusCreated,
-		wd_info.BuildStatusRunning,
-		wd_info.BuildStatusSuccess,
-		wd_info.BuildStatusFailure,
-		wd_info.BuildStatusError,
-		wd_info.BuildStatusKilled,
-	}
+	//// pluginBuildStateSupport
+	//pluginBuildStateSupport = []string{
+	//	wd_info.BuildStatusCreated,
+	//	wd_info.BuildStatusRunning,
+	//	wd_info.BuildStatusSuccess,
+	//	wd_info.BuildStatusFailure,
+	//	wd_info.BuildStatusError,
+	//	wd_info.BuildStatusKilled,
+	//}
 )
