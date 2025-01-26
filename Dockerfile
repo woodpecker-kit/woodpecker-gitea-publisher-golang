@@ -16,9 +16,9 @@ WORKDIR ${GO_PATH_SOURCE_DIR}
 RUN mkdir -p ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME}
 COPY $PWD ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME}
 
-RUN go install -v github.com/convention-change/zymosis/cmd/zymosis@latest
-RUN cd ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME} && \
-    zymosis -g go
+#RUN go install -v github.com/convention-change/zymosis/cmd/zymosis@latest
+#RUN cd ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME} && \
+#    zymosis -g go
 
 RUN cd ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME} && \
     go mod download -x

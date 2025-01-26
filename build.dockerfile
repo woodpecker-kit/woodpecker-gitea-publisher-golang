@@ -20,9 +20,9 @@ COPY $PWD ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME}
 RUN go env -w "GOPROXY=https://goproxy.cn,direct"
 RUN go env -w "GOPRIVATE='*.gitlab.com,*.gitee.com"
 
-RUN go install -v github.com/convention-change/zymosis/cmd/zymosis@latest
-RUN cd ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME} && \
-    zymosis -g go
+#RUN go install -v github.com/convention-change/zymosis/cmd/zymosis@latest
+#RUN cd ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME} && \
+#    zymosis -g go
 
 RUN cd ${GO_PATH_SOURCE_DIR}/${GO_ENV_PACKAGE_NAME} && \
     go mod download -x
