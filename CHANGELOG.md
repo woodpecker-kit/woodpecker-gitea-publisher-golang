@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.2.2](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.2.1...v1.2.2) (2025-01-27)
+
+### ♻ Refactor
+
+* comment out build status check ([b4eb7b2c](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/b4eb7b2c0787f330d52c41d0bf0bfa2b20d4df0b))
+
+### 👷‍ Build System
+
+* comment out zymosis installation and execution ([0519ffb1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/0519ffb1768a8f225bb7581200f2a3134e582837))
+
+* bump github.com/woodpecker-kit/woodpecker-tools ([fb670cae](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/fb670cae5e488e41e18945a16fec9787442e475c))
+
+* bump code.gitea.io/sdk/gitea from 0.19.0 to 0.20.0 ([c627d1b6](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/c627d1b6c8de73ed97d1e8ad774a1a894b7e3194))
+
 ## [1.2.1](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.2.0...v1.2.1) (2025-01-06)
 
 ### 👷‍ Build System
