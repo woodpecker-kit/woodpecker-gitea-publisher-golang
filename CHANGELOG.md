@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.3.0](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.2.2...v1.3.0) (2025-02-06)
+
+### ✨ Features
+
+* update docker bake-action to v6 and improve build file checking ([dc119c34](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/dc119c348db4fe86441fadb3fc75aa53e432f4a1)), feat [#38](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/issues/38)
+
+### 👷‍ Build System
+
+* bump github.com/woodpecker-kit/woodpecker-tools ([b85ae036](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/commit/b85ae03601e3f34b5652b8e4fb97d01b73368807))
+
 ## [1.2.2](https://github.com/woodpecker-kit/woodpecker-gitea-publisher-golang/compare/1.2.1...v1.2.2) (2025-01-27)
 
 ### ♻ Refactor
