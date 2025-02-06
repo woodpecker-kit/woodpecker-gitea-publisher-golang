@@ -81,11 +81,6 @@ func (p *GiteaPublishGolang) loadStepsTransfer() error {
 
 func (p *GiteaPublishGolang) checkArgs() error {
 
-	//errCheck := argCheckInArr("build status", p.wdShortInfo.Build.Status, pluginBuildStateSupport)
-	//if errCheck != nil {
-	//	return errCheck
-	//}
-
 	errCheckGiteaReleaseSupport := argCheckInArr(CliNameGiteaReleaseExistsDo, p.Settings.GiteaReleaseExistDo, giteaReleaseExistDoSupport)
 	if errCheckGiteaReleaseSupport != nil {
 		return errCheckGiteaReleaseSupport

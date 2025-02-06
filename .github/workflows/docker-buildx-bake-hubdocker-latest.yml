@@ -150,14 +150,22 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       -
+        name: check build files
+        run: |
+          echo "docker_bake_config_file_path: ${{ inputs.docker_bake_config_file_path }}"
+          ls -al ${{ runner.temp }}/${{ inputs.docker_bake_targets}}
+          echo "show: ${{ runner.temp }}/${{ inputs.docker_bake_targets}}/bake-meta.json"
+          cat ${{ runner.temp }}/${{ inputs.docker_bake_targets}}/bake-meta.json
+
+      -
         name: Build
         id: bake
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         timeout-minutes: ${{ inputs.docker-build-timeout-minutes }} # default 360
         with:
           files: |
-            ${{ inputs.docker_bake_config_file_path }}
-            ${{ runner.temp }}/${{ inputs.docker_bake_targets}}/bake-meta.json
+            cwd://${{ inputs.docker_bake_config_file_path }}
+            cwd://${{ runner.temp }}/${{ inputs.docker_bake_targets}}/bake-meta.json
           targets: ${{ inputs.docker_bake_targets }}
           no-cache: ${{ inputs.docker-build-no-cache }}
           provenance: false
