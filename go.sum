@@ -26,8 +26,8 @@ github.com/russross/blackfriday/v2 v2.1.0 h1:JIOH55/0cWyOuilr9/qlrm0BSXldqnqwMsf
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/sinlov-go/gitea-client-wrapper v1.4.1 h1:/6IUc3t9mF7FieovB2QTJ7nBVrgEPWXieQ0a4OcDRHA=
 github.com/sinlov-go/gitea-client-wrapper v1.4.1/go.mod h1:YdCgDtYoa+iCTpJB97iQBMu8uVm5/MUVTSd+XLtVi9U=
-github.com/sinlov-go/go-common-lib v1.7.1 h1:slVwwM/TiA7wzYYqRYMOHCOPmRLQn3NTU652fT2QWIE=
-github.com/sinlov-go/go-common-lib v1.7.1/go.mod h1:e+kY8eyLMnvayGezaWi3nU1VF5xsnMQ+DQUVdUC6Xbw=
+github.com/sinlov-go/go-common-lib v1.9.0 h1:FaPDG6fxzy5LgR6+APO6Cc4pfiaUyKFZVHpy0jHVJrA=
+github.com/sinlov-go/go-common-lib v1.9.0/go.mod h1:VodAtrLTtKgRd89soIA4DcWYk9m4wvzJt1bq9PQBcD4=
 github.com/sinlov-go/unittest-kit v1.2.1 h1:iI8jKiJOuyrPXTZuQHRwUzuuiqE5EUdS3brziFTkb3Y=
 github.com/sinlov-go/unittest-kit v1.2.1/go.mod h1:u/+OWj6Wm1mnfMRS8FhWjrg5aZ0yqAQM6y0wcHt/o3s=
 github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=

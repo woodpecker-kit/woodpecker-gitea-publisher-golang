@@ -1,6 +1,7 @@
 module github.com/woodpecker-kit/woodpecker-gitea-publisher-golang
 
-go 1.22.0
+go 1.23.0
+
 toolchain go1.24.1
 
 require (
@@ -9,7 +10,7 @@ require (
 	github.com/gookit/color v1.5.4
 	github.com/joho/godotenv v1.5.1
 	github.com/sinlov-go/gitea-client-wrapper v1.4.1
-	github.com/sinlov-go/go-common-lib v1.7.1
+	github.com/sinlov-go/go-common-lib v1.9.0
 	github.com/sinlov-go/unittest-kit v1.2.1
 	github.com/stretchr/testify v1.10.0
 	github.com/urfave/cli/v2 v2.27.6
