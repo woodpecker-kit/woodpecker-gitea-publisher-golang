@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	code.gitea.io/sdk/gitea v0.21.0
-	github.com/Masterminds/semver/v3 v3.3.1
+	github.com/Masterminds/semver/v3 v3.4.0
 	github.com/gookit/color v1.5.4
 	github.com/joho/godotenv v1.5.1
 	github.com/sinlov-go/gitea-client-wrapper v1.4.1
