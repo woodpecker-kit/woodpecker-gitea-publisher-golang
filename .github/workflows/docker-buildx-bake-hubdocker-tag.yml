@@ -223,7 +223,7 @@ jobs:
 
       -
         name: Download meta bake definition
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           # name: bake-meta
           ## https://github.com/actions/download-artifact/tree/v4?tab=readme-ov-file#breaking-changes
@@ -233,7 +233,7 @@ jobs:
 
       -
         name: Download digests
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           # name: digests
           ## https://github.com/actions/download-artifact/tree/v4?tab=readme-ov-file#breaking-changes
