@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.1
 
 require (
-	code.gitea.io/sdk/gitea v0.22.1
+	code.gitea.io/sdk/gitea v0.23.2
 	github.com/Masterminds/semver/v3 v3.4.0
 	github.com/gookit/color v1.6.0
 	github.com/joho/godotenv v1.5.1
