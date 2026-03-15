@@ -1,8 +1,6 @@
 module github.com/woodpecker-kit/woodpecker-gitea-publisher-golang
 
-go 1.24.0
-
-toolchain go1.24.1
+go 1.25.0
 
 require (
 	code.gitea.io/sdk/gitea v0.23.2
@@ -15,7 +13,7 @@ require (
 	github.com/stretchr/testify v1.11.1
 	github.com/urfave/cli/v2 v2.27.7
 	github.com/woodpecker-kit/woodpecker-tools v1.23.0
-	golang.org/x/mod v0.33.0
+	golang.org/x/mod v0.34.0
 )
 
 require (
