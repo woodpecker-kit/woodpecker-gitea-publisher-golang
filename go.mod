@@ -5,7 +5,7 @@ go 1.26
 require (
 	code.gitea.io/sdk/gitea v0.24.1
 	github.com/Masterminds/semver/v3 v3.4.0
-	github.com/gookit/color v1.6.0
+	github.com/gookit/color v1.6.1
 	github.com/joho/godotenv v1.5.1
 	github.com/sinlov-go/gitea-client-wrapper v1.4.1
 	github.com/sinlov-go/go-common-lib v1.9.0
