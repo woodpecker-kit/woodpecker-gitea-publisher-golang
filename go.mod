@@ -10,7 +10,7 @@ require (
 	github.com/sinlov-go/gitea-client-wrapper v1.4.1
 	github.com/sinlov-go/go-common-lib v1.9.0
 	github.com/sinlov-go/unittest-kit v1.2.1
-	github.com/stretchr/testify v1.11.1
+	github.com/stretchr/testify v1.12.1
 	github.com/urfave/cli/v2 v2.27.7
 	github.com/woodpecker-kit/woodpecker-tools v1.23.0
 	golang.org/x/mod v0.40.0
@@ -20,15 +20,13 @@ require (
 	github.com/42wim/httpsig v1.2.4 // indirect
 	github.com/chainguard-dev/git-urls v1.0.2 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/davidmz/go-pageant v1.0.2 // indirect
 	github.com/go-fed/httpsig v1.1.0 // indirect
 	github.com/hashicorp/go-version v1.9.0 // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/crypto v0.50.0 // indirect
 	golang.org/x/sys v0.43.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
